@@ -2,6 +2,7 @@ import { Inter } from "next/font/google";
 import "./globals.css";
 import Header from "@/components/header";
 import { ClerkProvider } from "@clerk/nextjs";
+import { Toaster } from "sonner";
 
 // we are going to change the font later
 const inter = Inter({
@@ -21,6 +22,7 @@ export default function RootLayout({ children }) {
           {/* header */}
           <Header />
           <main className="min-h-screen">{children}</main>
+          <Toaster richColors/>
 
           {/* footer */}
           <footer className="bg-blue-200 py-12">
