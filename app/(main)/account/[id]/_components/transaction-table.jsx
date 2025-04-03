@@ -14,7 +14,6 @@ import {
 import {
   Table,
   TableBody,
-  TableCaption,
   TableCell,
   TableHead,
   TableHeader,
@@ -28,9 +27,15 @@ import {
 } from "@/components/ui/tooltip";
 import { categoryColors } from "@/data/categories";
 import { format } from "date-fns";
-import { Clock, MoreHorizontal, RefreshCcw } from "lucide-react";
+import {
+  ChevronDown,
+  ChevronUp,
+  Clock,
+  MoreHorizontal,
+  RefreshCcw,
+} from "lucide-react";
 import { useRouter } from "next/navigation";
-import React from "react";
+import React, { useState } from "react";
 
 const RECURRING_INTERVALS = {
   DAILY: "Daily",
@@ -41,10 +46,39 @@ const RECURRING_INTERVALS = {
 
 const TransactionTable = ({ transactions }) => {
   const router = useRouter();
-  const filteredAndSortedTransactions = transactions;
-  console.log(transactions);
+  const [selectedIds, setSelectedIds] = useState([]);
+  const [sortConfig, setSortConfig] = useState({
+    field: "date",
+    direction: "desc",
+  });
 
-  const handleSort = () => {};
+  // console.log(selectedIds);
+
+  const filteredAndSortedTransactions = transactions;
+  // console.log(transactions);
+
+  const handleSort = (feild) => {
+    setSortConfig((current) => ({
+      feild,
+      direction:
+        current.feild == feild && current.direction === "asc" ? "desc" : "asc",
+    }));
+  };
+
+  const handleSelect = (id) => {
+    setSelectedIds((current) =>
+      current.includes(id)
+        ? current.filter((item) => item != id)
+        : [...current, id]
+    );
+  };
+  const handleSelectAll = () => {
+    setSelectedIds((current) =>
+      current.length === filteredAndSortedTransactions.length
+        ? []
+        : filteredAndSortedTransactions.map((t) => t.id)
+    );
+  };
   return (
     <div>
       {/* Filters */}
@@ -55,26 +89,57 @@ const TransactionTable = ({ transactions }) => {
           <TableHeader>
             <TableRow>
               <TableHead className="w-[50px]">
-                <Checkbox />
+                <Checkbox
+                  onCheckedChange={handleSelectAll}
+                  checked={
+                    selectedIds.length ===
+                      filteredAndSortedTransactions.length &&
+                    filteredAndSortedTransactions.length > 0
+                  }
+                />
               </TableHead>
               <TableHead
                 className="cursor-pointer"
                 onClick={() => handleSort("date")}
               >
-                <div className="flex items-center">Date</div>
+                <div className="flex items-center">
+                  Date
+                  {sortConfig.feild === "date" &&
+                    (sortConfig.direction === "asc" ? (
+                      <ChevronUp className="ml-1 h-4 w-4" />
+                    ) : (
+                      <ChevronDown className="ml-1 h-4 w-4" />
+                    ))}
+                </div>
               </TableHead>
               <TableHead>Description</TableHead>
               <TableHead
                 className="cursor-pointer"
                 onClick={() => handleSort("category")}
               >
-                <div className="flex items-center">Category</div>
+                <div className="flex items-center">
+                  Category
+                  {sortConfig.feild === "category" &&
+                    (sortConfig.direction === "asc" ? (
+                      <ChevronUp className="ml-1 h-4 w-4" />
+                    ) : (
+                      <ChevronDown className="ml-1 h-4 w-4" />
+                    ))}
+                </div>
               </TableHead>
               <TableHead
                 className="cursor-pointer"
                 onClick={() => handleSort("amount")}
               >
-                <div className="flex items-center justify-end">Amount</div>
+                <div className="flex items-center justify-end">
+                  Amount
+                  {sortConfig.feild === "amount" &&
+                    (sortConfig.direction === "asc" ? (
+                      <ChevronUp className="ml-1 h-4 w-4" />
+                    ) : (
+                      <ChevronDown className="ml-1 h-4 w-4" />
+                    ))}
+                </div>
               </TableHead>
               <TableHead>Recurring</TableHead>
               <TableHead className="w-[50px]" />
@@ -94,7 +159,10 @@ const TransactionTable = ({ transactions }) => {
               filteredAndSortedTransactions.map((transaction) => (
                 <TableRow key={transaction.id}>
                   <TableCell>
-                    <Checkbox />
+                    <Checkbox
+                      onCheckedChange={() => handleSelect(transaction.id)}
+                      checked={selectedIds.includes(transaction.id)}
+                    />
                   </TableCell>
                   <TableCell>
                     {format(new Date(transaction.date), "PPP")}
