@@ -92,6 +92,7 @@ export async function getAccountWithTransactions(accountId) {
   });
 
   if (!account) return null;
+  // console.log(account.transactions);
 
   return {
     ...serializeTransaction(account),
