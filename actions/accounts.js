@@ -100,51 +100,114 @@ export async function getAccountWithTransactions(accountId) {
   };
 }
 
+// export async function bulkDeleteTransactions(transactionIds) {
+//   try {
+//     const { userId } = await auth();
+//     if (!userId) throw new Error("Unauthorised");
+
+//     const user = await db.user.findUnique({
+//       where: {
+//         clerkUserId: userId,
+//       },
+//     });
+
+//     if (!user) {
+//       throw new Error("User not found");
+//     }
+//     // Get transactions to calculate balance changes
+//     const transactions = await db.transaction.findMany({
+//       where: {
+//         id: { in: transactionIds },
+//         userId: user.id,
+//       },
+//     });
+
+//     const accountBalanceChanges = transactions.reduce((acc, transaction) => {
+//       const change =
+//         transaction.type === "EXPENSE"
+//           ? transaction.amount
+//           : -transaction.amount;
+
+//       //if transaction are from multiple diff accounts
+//       // so create new acc id and + or - the change
+//       acc[transaction.accountId] = (acc[transaction.accountId] || 0) + change;
+//       return acc;
+//     }, {});
+
+//     //Deletes transactions and update account balances in a transaction
+
+//     // so if we have to make api calls combine and if one of the api call fails
+//     //so we have to fail the entire call for done this use transactions keyword in prisma
+
+//     await db.$transaction(async (tx) => {
+//       // we can perform multiples api calls in it
+
+//       //1st api ->Delete transactions
+//       await tx.transaction.deleteMany({
+//         where: {
+//           id: { in: transactionIds },
+//           userId: user.id,
+//         },
+//       });
+
+//       //2nd call - updating the acc balance
+//       //Object.entries is used to converting the accountBalanceChanges into an Array
+//       for (const [accountId, balanceChange] of Object.entries(
+//         accountBalanceChanges
+//       )) {
+//         await tx.account.update({
+//           where: {
+//             id: accountId,
+//           },
+//           data: {
+//             balance: {
+//               increment: balanceChange,
+//             },
+//           },
+//         });
+//       }
+//     });
+
+//     revalidatePath("/dashboard");
+//     revalidatePath("/account/[id]");
+
+//     return { success: true };
+//   } catch (error) {
+//     return { success: false, error: error.message };
+//   }
+// }
 export async function bulkDeleteTransactions(transactionIds) {
   try {
     const { userId } = await auth();
-    if (!userId) throw new Error("Unauthorised");
+    if (!userId) throw new Error("Unauthorized");
 
     const user = await db.user.findUnique({
-      where: {
-        clerkUserId: userId,
-      },
+      where: { clerkUserId: userId },
     });
 
-    if (!user) {
-      throw new Error("User not found");
-    }
+    if (!user) throw new Error("User not found");
 
+    // Get transactions to calculate balance changes
     const transactions = await db.transaction.findMany({
       where: {
-        id: {
-          id: { in: transactionIds },
-          userId: user.id,
-        },
+        id: { in: transactionIds },
+        userId: user.id,
       },
     });
 
+    // Group transactions by account to update balances
     const accountBalanceChanges = transactions.reduce((acc, transaction) => {
       const change =
         transaction.type === "EXPENSE"
           ? transaction.amount
           : -transaction.amount;
-
-      //if transaction are from multiple diff accounts
-      // so create new acc id and + or - the change
       acc[transaction.accountId] = (acc[transaction.accountId] || 0) + change;
       return acc;
     }, {});
 
-    //Deletes transactions and update account balances in a transaction
-
-    // so if we have to make api calls combine and if one of the api call fails
-    //so we have to fail the entire call for done this use transactions keyword in prisma
-
+    // Delete transactions and update account balances in a transaction
     await db.$transaction(async (tx) => {
-      // we can perform multiples api calls in it
-
-      //1st api
+      // Delete transactions
       await tx.transaction.deleteMany({
         where: {
           id: { in: transactionIds },
@@ -152,15 +215,12 @@ export async function bulkDeleteTransactions(transactionIds) {
         },
       });
 
-      //2nd call - updating the acc balance
-      //Object.entries is used to converting the accountBalanceChanges into an Array
+      // Update account balances
       for (const [accountId, balanceChange] of Object.entries(
         accountBalanceChanges
       )) {
         await tx.account.update({
-          where: {
-            id: accountId,
-          },
+          where: { id: accountId },
           data: {
             balance: {
               increment: balanceChange,
