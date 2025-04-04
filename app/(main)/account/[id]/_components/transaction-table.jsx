@@ -42,6 +42,8 @@ import {
   MoreHorizontal,
   RefreshCcw,
   Search,
+  Trash,
+  X,
 } from "lucide-react";
 import { useRouter } from "next/navigation";
 import React, { useState } from "react";
@@ -91,6 +93,14 @@ const TransactionTable = ({ transactions }) => {
         : filteredAndSortedTransactions.map((t) => t.id)
     );
   };
+
+  const handleBulkDelete = () => {};
+  const handleClearFilters = () => {
+    setSearchTerm("");
+    setTypeFilter("");
+    setRecurringFilter("");
+    setSelectedIds([]);
+  };
   return (
     <div className="space-y-4">
       {/* Filters */}
@@ -120,7 +130,7 @@ const TransactionTable = ({ transactions }) => {
             type={recurringFilter}
             onValueChange={(value) => setRecurringFilter(value)}
           >
-            <SelectTrigger className="w-[150px]">
+            <SelectTrigger className="w-[170px]">
               <SelectValue placeholder="All Transactions" />
             </SelectTrigger>
             <SelectContent>
@@ -128,6 +138,30 @@ const TransactionTable = ({ transactions }) => {
               <SelectItem value="non-recurring">Non-recurring Only</SelectItem>
             </SelectContent>
           </Select>
+
+          {selectedIds.length > 0 && (
+            <div className="flex items-center gap-2">
+              <Button
+                variant="destructive"
+                size="sm"
+                onClick={handleBulkDelete}
+              >
+                <Trash className="h-4 w-4 mr-2" />
+                Delete Selected ({selectedIds.length})
+              </Button>
+            </div>
+          )}
+
+          {(searchTerm || typeFilter || recurringFilter) && (
+            <Button
+              variant="outine"
+              size="icon"
+              onClick={handleClearFilters}
+              title="Clear Filters"
+            >
+              <X className="h-5 w-5" />
+            </Button>
+          )}
         </div>
       </div>
 
