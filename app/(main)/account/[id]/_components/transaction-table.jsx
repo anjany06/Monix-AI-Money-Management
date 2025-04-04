@@ -89,14 +89,39 @@ const TransactionTable = ({ transactions }) => {
         return !transaction.isRecurring;
       });
     }
+
+    //Apply type filter
+    if (typeFilter) {
+      result = result.filter((transaction) => transaction.type === typeFilter);
+    }
+
+    //Apply Sorting
+    result.sort((a, b) => {
+      let comparison = 0;
+      switch (sortConfig.field) {
+        case "date":
+          comparison = new Date(a.date) - new Date(b.date);
+          break;
+        case "amount":
+          comparison = a.amount - b.amount;
+          break;
+        case "category":
+          comparison = a.category.localeCompare(b.category);
+          break;
+
+        default:
+          comparison = 0;
+      }
+      return sortConfig.direction === "asc" ? comparison : -comparison;
+    });
     return result;
   }, [transactions, searchTerm, typeFilter, recurringFilter, sortConfig]);
 
-  const handleSort = (feild) => {
+  const handleSort = (field) => {
     setSortConfig((current) => ({
-      feild,
+      field,
       direction:
-        current.feild == feild && current.direction === "asc" ? "desc" : "asc",
+        current.field == field && current.direction === "asc" ? "desc" : "asc",
     }));
   };
 
@@ -207,7 +232,7 @@ const TransactionTable = ({ transactions }) => {
               >
                 <div className="flex items-center">
                   Date
-                  {sortConfig.feild === "date" &&
+                  {sortConfig.field === "date" &&
                     (sortConfig.direction === "asc" ? (
                       <ChevronUp className="ml-1 h-4 w-4" />
                     ) : (
@@ -222,7 +247,7 @@ const TransactionTable = ({ transactions }) => {
               >
                 <div className="flex items-center">
                   Category
-                  {sortConfig.feild === "category" &&
+                  {sortConfig.field === "category" &&
                     (sortConfig.direction === "asc" ? (
                       <ChevronUp className="ml-1 h-4 w-4" />
                     ) : (
@@ -236,7 +261,7 @@ const TransactionTable = ({ transactions }) => {
               >
                 <div className="flex items-center justify-end">
                   Amount
-                  {sortConfig.feild === "amount" &&
+                  {sortConfig.field === "amount" &&
                     (sortConfig.direction === "asc" ? (
                       <ChevronUp className="ml-1 h-4 w-4" />
                     ) : (
