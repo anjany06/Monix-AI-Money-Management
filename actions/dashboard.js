@@ -50,15 +50,15 @@ export async function createAccount(data) {
     //if this new account should be default, unset other default accounts
 
     if (shouldBeDefault) {
-      await db.account.updateMany({
-        where: {
-          userId: user.id,
-          isDefault: true,
-        },
-        data: {
-          isDefault: false,
-        },
-      });
+          await db.account.updateMany({
+            where: {
+              userId: user.id,
+              isDefault: true,
+            },
+            data: {
+              isDefault: false,
+            },
+          });
     }
 
     const account = await db.account.create({
