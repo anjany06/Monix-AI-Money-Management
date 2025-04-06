@@ -41,7 +41,7 @@ export async function getCurrentBudget(accountId) {
     const expenses = await db.transaction.aggregate({
       where: {
         userId: user.id,
-        type: "EXPENSES",
+        type: "EXPENSE",
         date: {
           gte: startOfMonth,
           lte: endOfMonth,

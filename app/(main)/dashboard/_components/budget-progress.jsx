@@ -1,14 +1,14 @@
 "use client";
+import { Button } from "@/components/ui/button";
 import {
   Card,
   CardContent,
   CardDescription,
-  CardFooter,
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
-import { Pencil } from "lucide-react";
+import { Check, Pencil, X } from "lucide-react";
 import React, { useState } from "react";
 
 const BudgetProgress = ({ initialBudget, currentExpenses }) => {
