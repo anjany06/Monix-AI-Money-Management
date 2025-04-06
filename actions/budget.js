@@ -2,6 +2,7 @@
 
 import { db } from "@/lib/prisma";
 import { auth } from "@clerk/nextjs/server";
+import { endOfDay, startOfDay } from "date-fns";
 import { revalidatePath } from "next/cache";
 
 export async function getCurrentBudget(accountId) {
@@ -26,17 +27,20 @@ export async function getCurrentBudget(accountId) {
     });
 
     //current month expense
+
     const currentDate = new Date();
-    const startOfMonth = new Date(
-      currentDate.getFullYear(),
-      currentDate.getMonth(),
-      1
-    );
-    const endOfMonth = new Date(
-      currentDate.getFullYear(),
-      currentDate.getMonth() + 1,
-      0
-    );
+    const startOfMonth = startOfDay(currentDate);
+    const endOfMonth = endOfDay(currentDate);
+    // const startOfMonth = new Date(
+    //   currentDate.getFullYear(),
+    //   currentDate.getMonth(),
+    //   1
+    // );
+    // const endOfMonth = new Date(
+    //   currentDate.getFullYear(),
+    //   currentDate.getMonth() + 1,
+    //   0
+    // );
 
     const expenses = await db.transaction.aggregate({
       where: {
