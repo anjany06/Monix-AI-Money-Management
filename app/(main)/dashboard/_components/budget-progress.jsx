@@ -9,6 +9,7 @@ import {
   CardTitle,
 } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
+import { Progress } from "@/components/ui/progress";
 import useFetch from "@/hooks/use-fetch";
 import { Check, Pencil, X } from "lucide-react";
 import React, { useEffect, useState } from "react";
@@ -114,7 +115,23 @@ const BudgetProgress = ({ initialBudget, currentExpenses }) => {
         </div>
       </CardHeader>
       <CardContent>
-        <p>Card Content</p>
+        {initialBudget && (
+          <div className="space-y-2">
+            <Progress
+              value={percentUsed}
+              extraStyles={`${
+                percentUsed >= 90
+                  ? "bg-red-500"
+                  : percentUsed >= 75
+                  ? "bg-yellow-500"
+                  : "bg-green-500"
+              }`}
+            />
+            <p className="text-xs text-muted-foreground text-right">
+              {percentUsed.toFixed(2)}% of your budget used
+            </p>
+          </div>
+        )}
       </CardContent>
     </Card>
   );
