@@ -1,13 +1,28 @@
 "use client";
 import { createTransaction } from "@/actions/transactions";
 import { transactionSchema } from "@/app/lib/schema";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
 import useFetch from "@/hooks/use-fetch";
 import { zodResolver } from "@hookform/resolvers/zod";
 import React from "react";
 import { useForm } from "react-hook-form";
 
 const AddTransactionForm = ({ accounts, categories }) => {
-  useForm({
+  const {
+    register,
+    setValue,
+    handleSubmit,
+    formState: { errors },
+    watch,
+    getValues,
+    reset,
+  } = useForm({
     resolver: zodResolver(transactionSchema),
     defaultValues: {
       type: "EXPENSE",
@@ -24,13 +39,30 @@ const AddTransactionForm = ({ accounts, categories }) => {
     fn: transactionFn,
     data: transactionResult,
   } = useFetch(createTransaction);
-  return <form>
-    {/* AI Receipt Scannner */}
-    <div>
-      <label>Type</label>
-      
-    </div>
-  </form>;
+
+  const type = watch("type");
+  const isRecurring = watch("isRecurring");
+  const date = watch("date");
+  return (
+    <form>
+      {/* AI Receipt Scannner */}
+      <div>
+        <label>Type</label>
+        <Select
+          onValueChange={(value) => setValue("type", value)}
+          defaultValue={type}
+        >
+          <SelectTrigger className="w-[180px]">
+            <SelectValue placeholder="Select Type" />
+          </SelectTrigger>
+          <SelectContent>
+            <SelectItem value="EXPENSE">Expense</SelectItem>
+            <SelectItem value="INCOME">Income</SelectItem>
+          </SelectContent>
+        </Select>
+      </div>
+    </form>
+  );
 };
 
 export default AddTransactionForm;
