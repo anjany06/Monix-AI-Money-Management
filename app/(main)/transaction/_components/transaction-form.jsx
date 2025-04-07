@@ -46,7 +46,7 @@ const AddTransactionForm = ({ accounts, categories }) => {
   return (
     <form>
       {/* AI Receipt Scannner */}
-      <div>
+      {/* <div>
         <label>Type</label>
         <Select
           onValueChange={(value) => setValue("type", value)}
@@ -60,7 +60,7 @@ const AddTransactionForm = ({ accounts, categories }) => {
             <SelectItem value="INCOME">Income</SelectItem>
           </SelectContent>
         </Select>
-      </div>
+      </div> */}
     </form>
   );
 };
