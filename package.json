@@ -10,8 +10,11 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@arcjet/inspect": "^1.0.0-beta.5",
     "@arcjet/next": "^1.0.0-beta.5",
+    "@bufbuild/protobuf": "^2.2.5",
     "@clerk/nextjs": "^6.12.12",
+    "@connectrpc/connect": "^2.0.2",
     "@hookform/resolvers": "^5.0.0",
     "@prisma/client": "^6.5.0",
     "@radix-ui/react-checkbox": "^1.1.4",
