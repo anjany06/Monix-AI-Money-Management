@@ -153,8 +153,8 @@ export async function scanReceipt(file) {
           data: base64String,
           mimeType: file.type,
         },
-        prompt,
       },
+      prompt,
     ]);
 
     const response = await result.response;

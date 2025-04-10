@@ -81,6 +81,7 @@ const AddTransactionForm = ({ accounts, categories }) => {
   );
 
   const handleScanComplete = (scannedData) => {
+    // console.log(scannedData);
     
   };
   return (

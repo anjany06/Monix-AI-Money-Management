@@ -3,7 +3,7 @@ import { scanReceipt } from "@/actions/transactions";
 import { Button } from "@/components/ui/button";
 import useFetch from "@/hooks/use-fetch";
 import { Camera, Loader2 } from "lucide-react";
-import React, { useRef } from "react";
+import React, { useEffect, useRef } from "react";
 import { toast } from "sonner";
 
 const ReceiptScanner = ({ onScanComplete }) => {
@@ -19,7 +19,16 @@ const ReceiptScanner = ({ onScanComplete }) => {
       toast.error("File size should be less than 5MB");
       return;
     }
+
+    await scanReceiptFn(file);
   };
+
+  useEffect(() => {
+    if (scannedData && !scanReceiptLoading) {
+      onScanComplete(scannedData);
+      toast.success("Receipt Scanned successfully");
+    }
+  }, [scanReceiptLoading, scannedData]);
   return (
     <div>
       <input
