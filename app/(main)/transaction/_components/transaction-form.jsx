@@ -22,10 +22,13 @@ import useFetch from "@/hooks/use-fetch";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { format } from "date-fns";
 import { CalendarIcon } from "lucide-react";
-import React from "react";
+import { useRouter } from "next/navigation";
+import React, { useEffect } from "react";
 import { useForm } from "react-hook-form";
+import { toast } from "sonner";
 
 const AddTransactionForm = ({ accounts, categories }) => {
+  const router = useRouter();
   const {
     register,
     setValue,
@@ -56,12 +59,28 @@ const AddTransactionForm = ({ accounts, categories }) => {
   const isRecurring = watch("isRecurring");
   const date = watch("date");
 
+  const onSubmit = async (data) => {
+    const formData = {
+      ...data,
+      amount: parseFloat(data.amount),
+    };
+    transactionFn(formData);
+  };
+
+  useEffect(() => {
+    if (transactionResult?.success && !transactionLoading) {
+      toast.success("Transaction created successfully");
+      reset();
+      router.push(`/account/${transactionResult.data.accountId}`);
+    }
+  }, [transactionResult, transactionLoading]);
+
   const filteredCategories = categories.filter(
     (category) => category.type === type
   );
 
   return (
-    <form className="space-y-2">
+    <form className="space-y-2" onSubmit={handleSubmit(onSubmit)}>
       {/* AI Receipt Scannner */}
       <div className="space-y-2">
         <label className="text-sm font-medium">Type</label>
@@ -228,8 +247,18 @@ const AddTransactionForm = ({ accounts, categories }) => {
         </div>
       )}
 
-      <div>
-        
+      <div className="flex gap-4">
+        <Button
+          type="button"
+          variant="outline"
+          className="w-full"
+          onClick={() => router.back()}
+        >
+          Cancel
+        </Button>
+        <Button type="submit" className="w-full" disabled={transactionLoading}>
+          Create Transaction
+        </Button>
       </div>
     </form>
   );
