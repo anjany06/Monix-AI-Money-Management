@@ -82,7 +82,16 @@ const AddTransactionForm = ({ accounts, categories }) => {
 
   const handleScanComplete = (scannedData) => {
     // console.log(scannedData);
-    
+    if (scannedData) {
+      setValue("amount", scannedData.amount.toString());
+      setValue("date", new Date(scannedData.date));
+      if (scannedData.description) {
+        setValue("description", scannedData.description);
+      }
+      if (scannedData.category) {
+        setValue("category", scannedData.category);
+      }
+    }
   };
   return (
     <form className="space-y-2" onSubmit={handleSubmit(onSubmit)}>
