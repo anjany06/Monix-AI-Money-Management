@@ -26,6 +26,7 @@ import { useRouter } from "next/navigation";
 import React, { useEffect } from "react";
 import { useForm } from "react-hook-form";
 import { toast } from "sonner";
+import ReceiptScanner from "./receipt-scanner";
 
 const AddTransactionForm = ({ accounts, categories }) => {
   const router = useRouter();
@@ -79,9 +80,13 @@ const AddTransactionForm = ({ accounts, categories }) => {
     (category) => category.type === type
   );
 
+  const handleScanComplete = (scannedData) => {
+    
+  };
   return (
     <form className="space-y-2" onSubmit={handleSubmit(onSubmit)}>
       {/* AI Receipt Scannner */}
+      <ReceiptScanner onScanComplete={handleScanComplete} />
       <div className="space-y-2">
         <label className="text-sm font-medium">Type</label>
         <Select
