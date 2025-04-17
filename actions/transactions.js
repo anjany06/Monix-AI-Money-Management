@@ -199,7 +199,7 @@ export async function getTransaction(id) {
     },
   });
 
-  if (transaction) throw new Error("Transaction not found");
+  if (!transaction) throw new Error("Transaction not found");
   return serializeAmount(transaction);
 }
 export async function updateTransaction(id, data) {
