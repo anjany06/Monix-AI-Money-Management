@@ -38,6 +38,7 @@ const AddTransactionForm = ({
   const searchParams = useSearchParams();
   const editId = searchParams.get("edit");
 
+  
   const {
     register,
     setValue,
