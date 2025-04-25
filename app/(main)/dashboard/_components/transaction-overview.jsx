@@ -17,6 +17,7 @@ import { cn } from "@/lib/utils";
 import { format } from "date-fns";
 import { ArrowDownRight, ArrowUpRight } from "lucide-react";
 import React, { useState } from "react";
+import { Cell, Pie, PieChart } from "recharts";
 
 const DashboardOverview = ({ accounts, transactions }) => {
   const [selectedAccountId, setSelectedAccountId] = useState(
@@ -106,7 +107,13 @@ const DashboardOverview = ({ accounts, transactions }) => {
           <CardTitle>Card Title</CardTitle>
         </CardHeader>
         <CardContent>
-          <p>Card Content</p>
+          <PieChart width={730} height={250}>
+            <Pie data={data} cx="50%" cy="50%" outerRadius={80} label>
+              {data.map((entry, index) => (
+                <Cell key={`cell-${index}`} fill={colors[index]} />
+              ))}
+            </Pie>
+          </PieChart>
         </CardContent>
       </Card>
     </div>
