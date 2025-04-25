@@ -56,7 +56,7 @@ const DashboardOverview = ({ accounts, transactions }) => {
           </Select>
         </CardHeader>
         <CardContent>
-          <div>
+          <div className="space-y-4">
             {recentTransactions.length === 0 ? (
               <p className="text-center text-muted-foreground py-4">
                 No recent transactions available for this account.
