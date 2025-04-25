@@ -50,15 +50,15 @@ export async function createAccount(data) {
     //if this new account should be default, unset other default accounts
 
     if (shouldBeDefault) {
-          await db.account.updateMany({
-            where: {
-              userId: user.id,
-              isDefault: true,
-            },
-            data: {
-              isDefault: false,
-            },
-          });
+      await db.account.updateMany({
+        where: {
+          userId: user.id,
+          isDefault: true,
+        },
+        data: {
+          isDefault: false,
+        },
+      });
     }
 
     const account = await db.account.create({
@@ -109,4 +109,31 @@ export async function getUserAccounts() {
   });
   const serializedAccount = accounts.map(serializeTransaction);
   return serializedAccount;
+}
+
+export async function getDashboardData() {
+  const { userId } = await auth();
+  if (!userId) throw new Error("Unauthorised");
+
+  const user = await db.user.findUnique({
+    where: {
+      clerkUserId: userId,
+    },
+  });
+
+  if (!user) {
+    throw new Error("User not found");
+  }
+
+  //Get all user transactions
+  const transactions = await db.transaction.findMany({
+    where: {
+      userId: user.id,
+    },
+    orderBy: {
+      createdAt: "desc",
+    },
+  });
+
+  return transactions.map(serializeTransaction);
 }
