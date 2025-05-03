@@ -8,14 +8,14 @@ import { checkUser } from "@/lib/checkUser";
 const Header = async () => {
   await checkUser();
   return (
-    <div className="fixed top-0 w-full bg-white/80 backdrop-blur-md z-50 border-b">
-      <nav className="container mx-auto px-4 py-4 flex items-center justify-between">
+    <div className="fixed top-0 min-w-screen bg-black/20 backdrop-blur-md z-50 supports-[backdrop-filter]:bg-black/20">
+      <nav className="mx-auto px-3 md:px-12 h-16 flex items-center justify-between">
         <Link href="/">
           <Image
-            src={"/logo.png"}
+            src={"/monix-logo-1.png"}
             alt="logo"
             width={200}
-            height={60}
+            height={100}
             className="h-12 w-auto object-contain"
           />
         </Link>

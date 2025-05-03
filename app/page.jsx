@@ -1,4 +1,5 @@
 import HeroSection from "@/components/hero";
+import HeroSection1 from "@/components/hero/hero-section";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import {
@@ -12,8 +13,8 @@ import Link from "next/link";
 
 export default function Home() {
   return (
-    <div className="mt-40">
-      <HeroSection />
+    <div>
+      <HeroSection1 />
 
       {/* Stats Section */}
       <section className="py-20 bg-blue-50">
