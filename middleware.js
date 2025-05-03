@@ -1,4 +1,4 @@
-import arcjet, { detectBot } from "@arcjet/next";
+import arcjet, { createMiddleware, detectBot, shield } from "@arcjet/next";
 import { clerkMiddleware, createRouteMatcher } from "@clerk/nextjs/server";
 
 const isProtectedRoute = createRouteMatcher([
@@ -10,7 +10,7 @@ const isProtectedRoute = createRouteMatcher([
 const aj = arcjet({
   key: process.env.ARCJET_API_KEY,
   rules: [
-    sheild({
+    shield({
       mode: "LIVE",
     }),
     detectBot({

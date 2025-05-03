@@ -159,7 +159,7 @@ const TransactionTable = ({ transactions }) => {
       return;
 
     // console.log(selectedIds);
-    await Promise.all(selectedIds.map((id) => deleteFn([id])));
+    await deleteFn(selectedIds);
     setSelectedIds([]);
   };
 
