@@ -17,7 +17,7 @@ const HeroSection1 = () => {
       <Beam className="bottom-40 right-10 w-96 h-96 opacity-20" />
       <Beam className="top-60 right-1/4 w-64 h-64 opacity-30" />
 
-      <div className="container relative mx-auto px-4 py-16 lg:py-24">
+      <div className="container relative mx-auto px-4 py-24">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
           <div className="z-10 space-y-6">
             <h1 className="font-orbitron text-4xl md:text-5xl lg:text-6xl font-bold leading-tight neon-text animate-fade-in">
@@ -48,10 +48,10 @@ const HeroSection1 = () => {
             </div>
           </div>
 
-          <div className="relative z-10">
+          <div className="relative z-10 mt-15 lg:mt-0">
             <div className="relative">
               {/* Main card */}
-              <div className="glass rounded-xl p-5 animate-float animate-fade-in">
+              <div className="glass rounded-xl p-5 animate-float animate-fade-in min-h-[200px]">
                 <div className="flex justify-between items-center mb-4">
                   <h3 className="text-lg font-medium text-white">
                     Financial Overview
@@ -68,7 +68,7 @@ const HeroSection1 = () => {
                 title="Total Balance"
                 value="$12,845.00"
                 trend="+2.4%"
-                className="absolute -top-10 -left-10 w-48 animate-float"
+                className="absolute -top-18 -left-5 md:-left-10 w-48 animate-float"
                 delay="animate-delay-200"
               />
 

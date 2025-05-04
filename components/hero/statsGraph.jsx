@@ -1,12 +1,13 @@
+"use client";
 import React from "react";
 
 const StatsGraph = () => {
   // Sample data
-  const data = [15, 40, 20, 35, 25, 42, 30, 45];
+  const data = [105, 40, 20, 35, 25, 42, 30, 45];
   const maxValue = Math.max(...data);
 
   return (
-    <div className="glass rounded-lg p-4 h-full w-full animate-fade-in animate-delay-300">
+    <div className="bg-white/10 backdrop-blur-lg border border-white/20 rounded-lg p-4 h-full w-full">
       <h3 className="text-sm font-medium text-gray-300 mb-3">
         Monthly Spending
       </h3>
@@ -16,15 +17,22 @@ const StatsGraph = () => {
             key={index}
             className="relative flex-1 flex flex-col items-center"
           >
+            {/* Fixed bar with better visibility */}
             <div
-              className="w-full bg-gradient-to-t from-cyan-500/30 to-blue-500/50 rounded-sm animate-pulse-slow"
               style={{
-                height: `${(value / maxValue) * 100}%`,
-                animationDelay: `${index * 0.1}s`,
+                position: "absolute",
+                bottom: "20px", // Position from bottom to ensure visibility
+                left: "0",
+                width: "100%",
+                height: `${(value / maxValue) * 500}%`, // Adjust height calculation
+                backgroundColor: "#33C3F0",
+                border: "1px solid rgba(255,255,255,0.5)",
+                boxShadow: "0 0 10px rgba(51,195,240,0.5)",
+                borderRadius: "3px",
+                zIndex: 10, // Ensure it's on top
               }}
             />
-            <div className="absolute bottom-0 w-full h-full bg-gradient-to-t from-cyan-500/0 to-cyan-500/0 hover:from-cyan-400/20 hover:to-cyan-500/30 transition-all duration-300 rounded-sm" />
-            <span className="text-xs text-gray-400 mt-1">
+            <span className="text-xs text-gray-400 mt-1 relative z-20">
               {String.fromCharCode(65 + index)}
             </span>
           </div>
