@@ -5,6 +5,12 @@ import {
   CreditCard,
   Globe,
   Zap,
+  LineChart,
+  Wallet,
+  Layers,
+  DollarSign,
+  Lightbulb,
+  ScanLine,
 } from "lucide-react";
 
 // Stats Data
@@ -30,36 +36,39 @@ export const statsData = [
 // Features Data
 export const featuresData = [
   {
-    icon: <BarChart3 className="h-8 w-8 text-blue-600" />,
-    title: "Advanced Analytics",
+    icon: <LineChart className="h-8 w-8 text-cyan-400" />,
+    title: "Intelligent Reporting",
     description:
-      "Get detailed insights into your spending patterns with AI-powered analytics",
+      "Explore comprehensive breakdowns of your expenses through machine learning analysis",
   },
   {
-    icon: <Receipt className="h-8 w-8 text-blue-600" />,
-    title: "Smart Receipt Scanner",
+    icon: <ScanLine className="h-8 w-8 text-cyan-400" />,
+    title: "Quick Receipt Capture",
+    description: "Instantly capture receipt information from receipt using AI",
+  },
+  {
+    icon: <Wallet className="h-8 w-8 text-cyan-400" />,
+    title: "Financial Planning",
     description:
-      "Extract data automatically from receipts using advanced AI technology",
+      "Set up and track spending limits with smart, personalized suggestions",
   },
   {
-    icon: <PieChart className="h-8 w-8 text-blue-600" />,
-    title: "Budget Planning",
-    description: "Create and manage budgets with intelligent recommendations",
+    icon: <Layers className="h-8 w-8 text-cyan-400" />,
+    title: "Unified Account Management",
+    description:
+      "Control all your financial accounts and cards from a single dashboard",
   },
   {
-    icon: <CreditCard className="h-8 w-8 text-blue-600" />,
-    title: "Multi-Account Support",
-    description: "Manage multiple accounts and credit cards in one place",
+    icon: <DollarSign className="h-8 w-8 text-cyan-400" />,
+    title: "Global Currency Support",
+    description:
+      "Handle different world currencies with instant exchange rate updates",
   },
   {
-    icon: <Globe className="h-8 w-8 text-blue-600" />,
-    title: "Multi-Currency",
-    description: "Support for multiple currencies with real-time conversion",
-  },
-  {
-    icon: <Zap className="h-8 w-8 text-blue-600" />,
-    title: "Automated Insights",
-    description: "Get automated financial insights and recommendations",
+    icon: <Lightbulb className="h-8 w-8 text-cyan-400" />,
+    title: "Smart Financial Tips",
+    description:
+      "Receive instant money tips and suggestions without lifting a finger",
   },
 ];
 

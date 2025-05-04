@@ -64,6 +64,13 @@ module.exports = {
           border: "hsl(var(--sidebar-border))",
           ring: "hsl(var(--sidebar-ring))",
         },
+        monix: {
+          dark: "#0A0F2C",
+          neon: "#00FFFF",
+          violet: "#8A2BE2",
+          "dark-light": "#1A1F3C",
+          "neon-dark": "#00DDDD",
+        },
       },
       borderRadius: {
         lg: "var(--radius)",
