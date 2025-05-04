@@ -8,8 +8,8 @@ import { checkUser } from "@/lib/checkUser";
 const Header = async () => {
   await checkUser();
   return (
-    <div className="fixed top-0 min-w-screen bg-black/20 backdrop-blur-md z-50 supports-[backdrop-filter]:bg-black/20">
-      <nav className="mx-auto px-3 md:px-12 h-16 flex items-center justify-between">
+    <div className="fixed top-0 min-w-screen bg-background/10 backdrop-blur-md z-50 supports-[backdrop-filter]:bg-background/10">
+      <nav className="mx-auto px-2 md:px-12 h-16 flex items-center justify-between">
         <Link href="/">
           <Image
             src={"/monix-logo-1.png"}
