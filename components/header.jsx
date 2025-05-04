@@ -8,7 +8,7 @@ import { checkUser } from "@/lib/checkUser";
 const Header = async () => {
   await checkUser();
   return (
-    <div className="fixed top-0 min-w-screen bg-background/10 backdrop-blur-md z-50 supports-[backdrop-filter]:bg-background/10">
+    <div className="fixed top-0 min-w-screen border-b bg-background/10 backdrop-blur-md z-50 supports-[backdrop-filter]:bg-background/10">
       <nav className="mx-auto px-2 md:px-12 h-16 flex items-center justify-between">
         <Link href="/">
           <Image
@@ -22,10 +22,7 @@ const Header = async () => {
 
         <div className="flex items-center space-x-4">
           <SignedIn>
-            <Link
-              href="/dashboard"
-              className="text-gray-600 hover:text-blue-600 flex items-center gap-2"
-            >
+            <Link href="/dashboard" className="flex items-center gap-2">
               <Button variant="outline">
                 <LayoutDashboard size={18} />
                 <span className="hidden md:inline">Dashboard</span>

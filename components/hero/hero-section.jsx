@@ -22,10 +22,8 @@ const HeroSection1 = () => {
           <div className="z-10 space-y-6">
             <h1 className="font-orbitron text-4xl md:text-5xl lg:text-6xl font-bold leading-tight neon-text animate-fade-in">
               Manage Your Money, <br />
-              <span className="text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 to-blue-500">
-                The Smart Way
-              </span>{" "}
-              – With MoniX
+              <span className="text-cyan-400 neon-text">The Smart Way</span> –
+              With MoniX
             </h1>
 
             <p className="text-lg md:text-xl text-gray-300 max-w-lg animate-fade-in animate-delay-200">
@@ -34,7 +32,7 @@ const HeroSection1 = () => {
             </p>
 
             <div className="flex flex-col sm:flex-row space-y-4 sm:space-y-0 sm:space-x-4 pt-4 animate-fade-in animate-delay-300">
-              <Button className="group bg-gradient-to-r from-cyan-500 to-blue-600 text-white border border-cyan-400/30 hover:opacity-90 neon-glow px-6 py-6 transition-all">
+              <Button className="group bg-gradient-to-r from-cyan-500 to-blue-600 text-white border border-cyan-400/30 hover:opacity-90 neon-glow py-6 transition-all">
                 Get Started
                 <ArrowRight
                   className="ml-2 group-hover:translate-x-1 transition-transform"
