@@ -76,14 +76,14 @@ const TestimonialsSection = () => {
       {/* Background decorative elements */}
       <div className="absolute inset-0 overflow-hidden">
         <div className="absolute -top-[30%] -right-[10%] w-[500px] h-[500px] bg-cyan-500/5 rounded-full blur-[200px]"></div>
-        <div className="absolute top-[60%] -left-[10%] w-[300px] h-[300px] bg-purple-500/5 rounded-full blur-[200px]"></div>
+        <div className="absolute top-[60%] -left-[10%] w-[300px] h-[300px] bg-purple-500/5 rounded-full blur-[20px]"></div>
       </div>
 
       <div className="container mx-auto max-w-6xl relative z-10">
         <div className="text-center mb-12 md:mb-16">
           <h2
             className={[
-              "text-3xl md:text-4xl font-bold bg-gradient-to-r from-white via-cyan-300 to-white bg-clip-text text-transparent pb-1 transition-opacity duration-1000",
+              "text-3xl md:text-4xl font-bold text neon-text pb-1 transition-opacity duration-1000",
               !isVisible ? "opacity-0" : "opacity-100",
             ].join(" ")}
           >
