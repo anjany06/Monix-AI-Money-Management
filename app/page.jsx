@@ -1,5 +1,6 @@
 import HeroSection1 from "@/components/hero/hero-section";
 import HowItWorksSection from "@/components/how-it-works";
+import TestimonialsSection from "@/components/testinomials/testinomial-section";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import {
@@ -64,7 +65,7 @@ export default function Home() {
       <HowItWorksSection />
 
       {/* Testimonials Section */}
-      <section id="testimonials" className="py-20">
+      {/* <section id="testimonials" className="py-20">
         <div className="container mx-auto px-4">
           <h2 className="text-3xl font-bold text-center mb-16">
             What Our Users Say
@@ -94,7 +95,8 @@ export default function Home() {
             ))}
           </div>
         </div>
-      </section>
+      </section> */}
+      <TestimonialsSection />
 
       {/* CTA Section */}
       <section className="py-20 bg-blue-600">
