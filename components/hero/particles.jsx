@@ -22,7 +22,7 @@ const Particles = ({ className }) => {
 
     const initParticles = () => {
       particles = [];
-      const particleCount = Math.floor((canvas.width * canvas.height) / 10000);
+      const particleCount = Math.floor((canvas.width * canvas.height) / 8000);
 
       for (let i = 0; i < particleCount; i++) {
         particles.push({
