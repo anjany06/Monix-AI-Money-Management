@@ -1,3 +1,4 @@
+import CTASection from "@/components/callToAction";
 import HeroSection1 from "@/components/hero/hero-section";
 import HowItWorksSection from "@/components/how-it-works";
 import TestimonialsSection from "@/components/testinomials/testinomial-section";
@@ -99,7 +100,7 @@ export default function Home() {
       <TestimonialsSection />
 
       {/* CTA Section */}
-      <section className="py-20 bg-blue-600">
+      {/* <section className="py-20 bg-blue-600">
         <div className="container mx-auto px-4 text-center">
           <h2 className="text-3xl font-bold text-white mb-6">
             Ready to Take Control of Your Finances ?
@@ -117,7 +118,8 @@ export default function Home() {
             </Button>
           </Link>
         </div>
-      </section>
+      </section> */}
+      <CTASection />
     </div>
   );
 }
