@@ -3,6 +3,7 @@ import "./globals.css";
 import Header from "@/components/header";
 import { ClerkProvider } from "@clerk/nextjs";
 import { Toaster } from "sonner";
+import Footer from "@/components/footer";
 
 // we are going to change the font later
 const inter = Inter({
@@ -22,14 +23,10 @@ export default function RootLayout({ children }) {
           {/* header */}
           <Header />
           <main className="min-h-screen">{children}</main>
-          <Toaster richColors/>
+          <Toaster richColors />
 
           {/* footer */}
-          <footer className="bg-blue-200 py-12">
-            <div className="container mx-auto px-4 text-center text-gray-600">
-              <p>Made by anjany</p>
-            </div>
-          </footer>
+          <Footer />
         </body>
       </html>
     </ClerkProvider>
