@@ -9,6 +9,7 @@ import {
 } from "@/components/ui/card";
 import { Switch } from "@/components/ui/switch";
 import useFetch from "@/hooks/use-fetch";
+import { cn } from "@/lib/utils";
 import { ArrowDownRight, ArrowUpRight } from "lucide-react";
 import Link from "next/link";
 import React, { useEffect } from "react";
@@ -45,8 +46,11 @@ const AccountCard = ({ account }) => {
     }
   }, [error]);
 
+  // Determine if the amount is negative
+  const isNegative = balance < 0;
+
   return (
-    <Card className="hover:shadow-md transition-shadow group relative">
+    <Card className="animate-fadeInUp group relative">
       <Link href={`/account/${id}`}>
         <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
           <CardTitle className="text-sm font-medium capitalize">
@@ -59,7 +63,15 @@ const AccountCard = ({ account }) => {
           />
         </CardHeader>
         <CardContent>
-          <div className="text-2xl font-bold">
+          {/* <div className="text-2xl font-bold">
+            ${parseFloat(balance).toFixed(2)}
+          </div> */}
+          <div
+            className={cn(
+              "text-3xl font-bold mb-1",
+              isNegative ? "expense-text" : "income-text"
+            )}
+          >
             ${parseFloat(balance).toFixed(2)}
           </div>
           <p className="text-xs text-muted-foreground">

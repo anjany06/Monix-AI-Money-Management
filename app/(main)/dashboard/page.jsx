@@ -40,12 +40,17 @@ const DashboardPage = async () => {
       {/* Accounts Grid */}
       <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
         <CreateAccountDrawer>
-          <Card className="hover:shadow-md transition-shadow cursor-pointer border-dashed">
-            <CardContent className="flex flex-col items-center justify-center text-muted-foreground h-full pt-5">
-              <Plus className="w-10 h-10 mb-2" />
-              <p className="text-sm font-medium">Add new Account</p>
-            </CardContent>
-          </Card>
+          <div className="glass-card p-6 flex flex-col items-center justify-center opacity-0 animate-fadeInUp animate-delay-100 cursor-pointer hover:bg-white/5 transition-all duration-300 group">
+            <div className="w-14 h-14 rounded-full bg-white/10 flex items-center justify-center mb-3 group-hover:bg-gradient-to-r from-cyan-500/30 to-blue-500/30 transition-all duration-300">
+              <Plus
+                size={24}
+                className="text-gray-400 group-hover:text-cyan-400 transition-colors"
+              />
+            </div>
+            <span className="group-hover:text-white transition-colors neon-text-cyan">
+              Add new Account
+            </span>
+          </div>
         </CreateAccountDrawer>
         {accounts.length > 0 &&
           accounts?.map((account) => {
