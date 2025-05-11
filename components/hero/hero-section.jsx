@@ -6,6 +6,7 @@ import Particles from "./particles";
 import Beam from "./beam";
 import StatsGraph from "./statsGraph";
 import FinanceCard from "./finance-card";
+import Link from "next/link";
 
 const HeroSection1 = () => {
   return (
@@ -32,13 +33,15 @@ const HeroSection1 = () => {
             </p>
 
             <div className="flex flex-col sm:flex-row space-y-4 sm:space-y-0 sm:space-x-4 pt-4 animate-fade-in animate-delay-300">
-              <Button className="group bg-gradient-to-r from-cyan-500 to-blue-600 text-white border border-cyan-400/30 hover:opacity-90 neon-glow py-6 transition-all">
-                Get Started
-                <ArrowRight
-                  className="ml-2 group-hover:translate-x-1 transition-transform"
-                  size={18}
-                />
-              </Button>
+              <Link href="/dashboard">
+                <Button className="group bg-gradient-to-r from-cyan-500 to-blue-600 text-white border border-cyan-400/30 hover:opacity-90 neon-glow py-6 transition-all">
+                  Get Started
+                  <ArrowRight
+                    className="ml-2 group-hover:translate-x-1 transition-transform"
+                    size={18}
+                  />
+                </Button>
+              </Link>
               <Button
                 variant="outline"
                 className="bg-transparent border border-cyan-400/30 text-cyan-400 hover:bg-cyan-950/30 hover:text-cyan-300 px-6 py-6 transition-all"
