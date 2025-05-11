@@ -1,4 +1,5 @@
 import CTASection from "@/components/callToAction";
+import Features from "@/components/features";
 import HeroSection1 from "@/components/hero/hero-section";
 import HowItWorksSection from "@/components/how-it-works";
 import TestimonialsSection from "@/components/testinomials/testinomial-section";
@@ -34,34 +35,7 @@ export default function Home() {
         </div>
       </section>
 
-      {/* features section */}
-      <section className="py-20">
-        <div className="container mx-auto px-4">
-          <div className="text-center mb-16">
-            <h2 className="text-3xl md:text-4xl font-bold mb-4 neon-text">
-              Powerful Features
-            </h2>
-            <p className="text-white/70 max-w-2xl mx-auto">
-              Monix helps you take control of your finances with these powerful
-              tools and capabilities.
-            </p>
-          </div>
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {featuresData.map((feature, index) => (
-              <Card
-                key={index}
-                className="backdrop-blur-md bg-white/5 border border-white/20 shadow-lg"
-              >
-                <CardContent className="space-y-4 pt-4">
-                  {feature.icon}
-                  <h3 className="text-xl font-semibold">{feature.title}</h3>
-                  <p className="text-gray-400">{feature.description}</p>
-                </CardContent>
-              </Card>
-            ))}
-          </div>
-        </div>
-      </section>
+      <Features />
 
       <HowItWorksSection />
 
