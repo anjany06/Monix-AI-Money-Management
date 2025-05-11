@@ -17,7 +17,14 @@ import { cn } from "@/lib/utils";
 import { format } from "date-fns";
 import { ArrowDownRight, ArrowUpRight } from "lucide-react";
 import React, { useState } from "react";
-import { Cell, Legend, Pie, PieChart, ResponsiveContainer, Tooltip } from "recharts";
+import {
+  Cell,
+  Legend,
+  Pie,
+  PieChart,
+  ResponsiveContainer,
+  Tooltip,
+} from "recharts";
 
 const COLORS = [
   "#FF6B6B",
@@ -74,7 +81,7 @@ const DashboardOverview = ({ accounts, transactions }) => {
 
   return (
     <div className="grid gap-4 md:grid-cols-2">
-      <Card>
+      <Card className="animate-fadeInUp animate-delay-100">
         <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-4">
           <CardTitle className="text-base font-normal">
             Recent Transactions
@@ -107,7 +114,7 @@ const DashboardOverview = ({ accounts, transactions }) => {
                 return (
                   <div
                     key={transaction.id}
-                    className="flex items-center justify-between"
+                    className="flex items-center justify-between bg-white/5 p-4 rounded-md hover:bg-white/10 transition-all duration-200"
                   >
                     <div className="space-y-1">
                       <p className="text-sm font-medium leading-none">
@@ -142,7 +149,7 @@ const DashboardOverview = ({ accounts, transactions }) => {
         </CardContent>
       </Card>
 
-      <Card>
+      <Card className="animate-fadeInUp animate-delay-200">
         <CardHeader>
           <CardTitle className="text-base font-normal">
             Monthly Expense Breakdown
