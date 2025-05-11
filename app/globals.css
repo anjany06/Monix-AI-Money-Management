@@ -291,6 +291,9 @@
 }
 
 .animate-pulse-slow {
+  animation: pulseGlow 4s ease-in-out infinite;
+}
+.animate-pulse {
   animation: pulse 4s ease-in-out infinite;
 }
 
@@ -300,6 +303,9 @@
 
 .animate-fadeInUp {
   animation: fadeInUp 0.5s ease-out forwards;
+}
+.animate-float {
+  animation: float 0.5s ease-out forwards;
 }
 
 .animate-delay-100 {
