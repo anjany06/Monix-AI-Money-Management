@@ -2,6 +2,7 @@ import CTASection from "@/components/callToAction";
 import Features from "@/components/features";
 import HeroSection1 from "@/components/hero/hero-section";
 import HowItWorksSection from "@/components/how-it-works";
+import StatsSection from "@/components/stats";
 import TestimonialsSection from "@/components/testinomials/testinomial-section";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
@@ -20,20 +21,7 @@ export default function Home() {
       <HeroSection1 />
 
       {/* Stats Section */}
-      <section className="py-20 bg-blue-50">
-        <div className="container mx-auto px-4">
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
-            {statsData.map((stat, index) => (
-              <div key={index} className="text-center">
-                <div className="text-4xl font-bold text-blue-600 mb-2">
-                  {stat.value}
-                </div>
-                <div className="text-gray-600">{stat.label}</div>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
+      <StatsSection />
 
       <Features />
 
