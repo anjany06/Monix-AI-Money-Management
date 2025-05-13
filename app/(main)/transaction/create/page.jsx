@@ -15,9 +15,9 @@ const AddTransaction = async ({ searchParams }) => {
     initialData = transaction;
   }
   return (
-    <div className="max-w-3xl mx-auto px-5">
+    <div className="max-w-3xl mx-3 md:mx-auto px-5 glass-card py-8 rounded-lg">
       <div className="flex justify-center md:justify-normal mb-8">
-        <h1 className="text-5xl gradient-title">
+        <h1 className="text-4xl md:text-5xl neon-text font-bold text-center">
           {editId ? "Edit" : "Add"} Transaction
         </h1>
       </div>

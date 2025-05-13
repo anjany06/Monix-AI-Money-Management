@@ -18,7 +18,7 @@ const AccountPage = async ({ params }) => {
     <div className="space-y-8 px-5">
       <div className="flex gap-4 items-end justify-between">
         <div>
-          <h1 className="text-5xl sm:text-6xl font-bold gradient-title capitalize">
+          <h1 className="text-5xl sm:text-6xl font-bold neon-text capitalize pb-3">
             {account.name}
           </h1>
           <p className="text-muted-foreground">
