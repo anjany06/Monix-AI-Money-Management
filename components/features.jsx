@@ -45,7 +45,7 @@ const Features = () => {
   }, []);
   return (
     <section id="features" className="py-5 md:py-15" ref={featuresRef}>
-      <div className="container mx-auto px-4">
+      <div className="container mx-auto px-4 md:px-16">
         <div
           className={`feature-card text-center mb-6 md:mb-16 transition-all duration-700 ease-out ${
             visibleItems[-1]
