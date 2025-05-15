@@ -1,10 +1,23 @@
 "use client";
-import React from "react";
+import React, { useState, useEffect } from "react";
 
 const StatsGraph = () => {
   // Sample data
-  const data = [105, 40, 20, 35, 25, 42, 30, 45];
+  const data = [105, 40, 120, 35, 25, 90, 30, 55];
   const maxValue = Math.max(...data);
+
+  // Animation state
+  const [animated, setAnimated] = useState(false);
+
+  // Trigger animation after component mounts
+  useEffect(() => {
+    // Small delay before starting animation
+    const timer = setTimeout(() => {
+      setAnimated(true);
+    }, 300);
+
+    return () => clearTimeout(timer);
+  }, []);
 
   return (
     <div className="bg-white/10 backdrop-blur-lg border border-white/20 rounded-lg p-4 h-full w-full">
@@ -17,19 +30,20 @@ const StatsGraph = () => {
             key={index}
             className="relative flex-1 flex flex-col items-center"
           >
-            {/* Fixed bar with better visibility */}
+            {/* Animated bar */}
             <div
               style={{
                 position: "absolute",
-                bottom: "20px", // Position from bottom to ensure visibility
+                bottom: "20px",
                 left: "0",
                 width: "100%",
-                height: `${(value / maxValue) * 500}%`, // Adjust height calculation
+                height: animated ? `${(value / maxValue) * 500}%` : "0%",
                 backgroundColor: "#33C3F0",
                 border: "1px solid rgba(255,255,255,0.5)",
                 boxShadow: "0 0 10px rgba(51,195,240,0.5)",
                 borderRadius: "3px",
-                zIndex: 10, // Ensure it's on top
+                zIndex: 10,
+                transition: `height 1s cubic-bezier(0.34, 1.56, 0.64, 1) ${index * 0.1}s`,
               }}
             />
             <span className="text-xs text-gray-400 mt-1 relative z-20">

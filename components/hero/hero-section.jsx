@@ -89,7 +89,7 @@ const HeroSection1 = () => {
                 title="This Month"
                 value="$3,245.00"
                 trend="-1.2%"
-                className="absolute -bottom-12 -right-8 w-48 opacity-0 animate-fadeInUp animate-delay-600"
+                className="absolute -bottom-12 -right-6 md:-right-8 w-48 opacity-0 animate-fadeInUp animate-delay-600"
                 delay=""
                 floatingAnimation="animate-float"
               />
