@@ -15,7 +15,7 @@ const HeroSection1 = () => {
       <div className="absolute top-1/4 left-1/4 w-72 h-72 bg-blue-500 rounded-full opacity-10 blur-[100px]"></div>
       <div className="absolute top-1/2 left-2/3 w-64 h-64 bg-cyan-400 rounded-full opacity-10 blur-[100px]"></div>
 
-      <div className="container relative mx-auto px-4 md:px-16 py-24">
+      <div className="container relative mx-auto px-4 md:px-20 py-24">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
           <div className="z-10 space-y-6">
             {/* Change to fadeInUp for text elements */}
