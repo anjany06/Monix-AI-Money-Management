@@ -22,7 +22,7 @@ export default function RootLayout({ children }) {
         <body className={`${inter.className}`}>
           {/* header */}
           <Header />
-          <main className="min-h-screen container mx-auto">{children}</main>
+          <main className="min-h-screen">{children}</main>
           <Toaster richColors />
 
           {/* footer */}
