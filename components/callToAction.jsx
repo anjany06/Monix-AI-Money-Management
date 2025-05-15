@@ -28,7 +28,7 @@ const CTASection = () => {
             {/* Enhanced animated gradient border with blue focus */}
             <div
               className="absolute -inset-0.5 rounded-lg bg-gradient-to-r from-blue-500 via-cyan-400 to-blue-600 opacity-70 
-              group-hover:opacity-100 blur-md transition duration-500"
+              group-hover:opacity-100 blur-md transition duration-500 animate-pulse-slow"
             ></div>
 
             {/* Enhanced glass button with blue glow */}

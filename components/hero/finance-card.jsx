@@ -7,10 +7,11 @@ const FinanceCard = ({
   trendIcon,
   className = "",
   delay = "animate-delay-100",
+  floatingAnimation,
 }) => {
   return (
     <div
-      className={`glass rounded-lg p-4 ${className} animate-fade-in ${delay}`}
+      className={`glass rounded-lg p-4 ${className} animate-fade-in ${delay}  ${floatingAnimation}`}
     >
       <h3 className="text-sm font-medium text-gray-300 mb-1">{title}</h3>
       <div className="flex items-end justify-between">
