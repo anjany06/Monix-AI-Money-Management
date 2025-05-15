@@ -34,7 +34,7 @@ const CTASection = () => {
             {/* Enhanced glass button with blue glow */}
             <button
               className="relative px-4 md:px-8 py-5 rounded-lg bg-slate-900/80 backdrop-blur-sm border border-blue-400/20
-              text-white text-lg font-semibold group-hover:bg-slate-800/80 transform transition duration-300
+              text-white text-md md:text-lg font-semibold group-hover:bg-slate-800/80 transform transition duration-300
               hover:scale-105 flex items-center space-x-2 shadow-[0_0_15px_rgba(59,130,246,0.5)]"
             >
               <span>Launch Your Finance Journey</span>
