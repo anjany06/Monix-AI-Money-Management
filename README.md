@@ -1,36 +1,111 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# MONIX – AI-Powered Money Management Platform
 
-## Getting Started
+![monix](public/monix-preview.png)
 
-First, run the development server:
+## 🌟 Overview  
+💰 **MONIX** is an AI-powered money management platform built to help you seamlessly track your **income** and **expenses** across multiple accounts. Featuring smart categorization, **AI receipt scanning**, budget alerts, and monthly AI-powered financial insights, MONIX brings smart financial discipline to your daily life.
 
+## 🌟 Features
+* ✅ **Multi-Account Management** – Track income & expenses across various accounts  
+* ✅ **Smart Categorization** – Automatically categorize your transactions  
+* ✅ **AI-Powered Receipt Scanning** – Upload and auto-fill data via scanned receipts  
+* ✅ **Budget Management** – Set budgets, get alerts at 80% threshold  
+* ✅ **Recurring Transactions** – Automatically add recurring payments/incomes  
+* ✅ **Advanced Filtering** – Search and filter through all transactions with ease  
+* ✅ **Interactive Visualizations** – Graphs powered by **Recharts** for daily insights  
+* ✅ **Monthly AI Insights** – Get end-of-month analysis with personalized AI insights  
+* ✅ **Modern UI** – Built with **ShadCN** and **TailwindCSS**  
+* ✅ **Secure Authentication** – Powered by **Clerk**  
+* ✅ **Bot Protection** – Integrated with **Arcjet**  
+* ✅ **Automated Reports** – Delivered monthly via **Inngest** automation  
+
+## 🔗 Live Demo
+Check out **MONIX** in action: **[Live Link](https://monix.vercel.app)** 🚀
+
+## 💻 Tech Stack
+| Category       | Technology                                 |
+|----------------|---------------------------------------------|
+| **Frontend**   | Next.js, TailwindCSS, ShadCN                |
+| **Backend**    | Next.js Server Actions, Prisma              |
+| **AI**         | Gemini API                                  |
+| **Database**   | Supabase                                    |
+| **Charts**     | Recharts                                    |
+| **Auth**       | Clerk                                       |
+| **Automation** | Inngest                                     |
+| **Bot Defense**| Arcjet                                      |
+| **Forms**      | React Hook Form, Zod                        |
+| **Deployment** | Vercel                                      |
+
+## 📥 Installation
+
+### Clone the repository:
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+git clone https://github.com/anjany06/monix.git
+cd monix
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+### Install dependencies:
+```bash
+npm install
+```
 
-You can start editing the page by modifying `app/page.js`. The page auto-updates as you edit the file.
+### Set up environment variables:
+1. Copy `.env.example` to `.env`
+2. Fill in all required keys:
+   - Supabase URL & Key
+   - Clerk keys
+   - Gemini API key
+   - Inngest config
+   - Any other necessary env variables
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+### Initialize the database:
+```bash
+npx prisma generate
+npx prisma migrate dev
+```
 
-## Learn More
+### Start the development server:
+```bash
+npm run dev
+```
 
-To learn more about Next.js, take a look at the following resources:
+## 🤝 Contribution Guidelines
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+### 🌱 How to Get Involved
+1. Fork the repository.
+2. Clone your fork:
+   ```bash
+   git clone https://github.com/your-username/monix.git
+   ```
+3. Create a new branch:
+   ```bash
+   git checkout -b feature/<feature-name>
+   ```
+4. Make changes and commit:
+   ```bash
+   git add .
+   git commit -m "Your descriptive commit message"
+   ```
+5. Push changes:
+   ```bash
+   git push origin <your-branch-name>
+   ```
+6. Open a pull request.
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+### 📌 Suggested Contributions
+- Improve **AI Categorization** – Train smarter models with more datasets.
+- Add **Currency Conversion** – Enable multi-currency budget management.
+- Expand **Insight Reports** – More in-depth monthly AI analytics.
+- Enhance **Receipt OCR** – Improve accuracy of scanned data.
 
-## Deploy on Vercel
+## 🌟 Stargazers & Forkers
+We appreciate your support! 🌟🍴
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+## 🛡 License
+MONIX is licensed under the **MIT License**.
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+## 📬 Contact
+For queries or collaborations:  
+📧 **Email:** anjany.pandey06@gmail.com  
+💼 **LinkedIn:** [https://www.linkedin.com/in/anjany-pandey-927169294/](https://www.linkedin.com/in/anjany-pandey-927169294/)  
+🐦 **Twitter/X:** [https://x.com/anjany06](https://x.com/anjany06)
