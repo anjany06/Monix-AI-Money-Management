@@ -20,7 +20,7 @@
 * ✅ **Automated Reports** – Delivered monthly via **Inngest** automation  
 
 ## 🔗 Live Demo
-Check out **MONIX** in action: **[Live Link](https://monix.vercel.app)** 🚀
+Check out **MONIX** in action: **[Live Link](https://monix-three.vercel.app)** 🚀
 
 ## 💻 Tech Stack
 | Category       | Technology                                 |
