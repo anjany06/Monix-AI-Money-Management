@@ -15,7 +15,7 @@ const AccountPage = async ({ params }) => {
   const { transactions, ...account } = accountData;
   // console.log(transactions);
   return (
-    <div className="space-y-8 px-5">
+    <div className="space-y-8 px-5 md:px-20">
       <div className="flex gap-4 items-end justify-between">
         <div>
           <h1 className="text-5xl sm:text-6xl font-bold neon-text capitalize pb-3">
