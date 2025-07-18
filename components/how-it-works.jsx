@@ -1,5 +1,13 @@
 "use client";
 import React, { useEffect, useRef, useState } from "react";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import {
+  ArrowRight,
+  User,
+  BarChart3,
+  Lightbulb,
+  TrendingUp,
+} from "lucide-react";
 
 const steps = [
   {
@@ -7,23 +15,31 @@ const steps = [
     title: "Create Account",
     description:
       "Get started in minutes with our simple and secure sign-up process.",
+    icon: User,
+    accentColor: "from-blue-500 to-cyan-500",
   },
   {
     number: "02",
     title: "Track Your Spending",
     description:
       "Automatically categorize and track your transactions in real-time.",
+    icon: BarChart3,
+    accentColor: "from-emerald-500 to-teal-500",
   },
   {
     number: "03",
     title: "Get Insights",
     description:
       "Receive AI-powered recommendations tailored to your spending habits.",
+    icon: Lightbulb,
+    accentColor: "from-yellow-500 to-orange-500",
   },
   {
     number: "04",
     title: "Grow Your Wealth",
     description: "Track your progress and watch your financial health improve.",
+    icon: TrendingUp,
+    accentColor: "from-purple-500 to-pink-500",
   },
 ];
 
@@ -60,7 +76,7 @@ const HowItWorksSection = () => {
                 const newSteps = [...prevState.steps];
                 newSteps[stepIndex] = true;
 
-                //Also show the line connecting to the next step of this right
+                //Also show the line connecting to the next step
                 const newLines = [...prevState.lines];
                 if (stepIndex < steps.length - 1) {
                   newLines[stepIndex] = true;
@@ -81,7 +97,7 @@ const HowItWorksSection = () => {
       },
       {
         threshold: 0.2,
-        rooMargin: "0px",
+        rootMargin: "0px",
       }
     );
 
@@ -103,15 +119,21 @@ const HowItWorksSection = () => {
       stepElements.forEach((el) => observer.unobserve(el));
     };
   }, []);
+
   return (
-    <section id="how-it-works" className="py-24 relative" ref={sectionRef}>
-      {/* Background effects */}
+    <section
+      id="how-it-works"
+      className="py-24 relative overflow-hidden"
+      ref={sectionRef}
+    >
+      {/* Enhanced background effects */}
       <div className="absolute top-1/4 left-1/4 w-72 h-72 bg-blue-500 rounded-full opacity-10 blur-[100px]"></div>
       <div className="absolute bottom-1/3 right-1/3 w-96 h-96 bg-indigo-600 rounded-full opacity-15 blur-[100px]"></div>
+      <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] bg-gradient-to-r from-cyan-500/5 to-purple-500/5 rounded-full blur-3xl"></div>
 
-      <div className="container mx-auto px-4 md:px-20">
+      <div className="container mx-auto px-4 md:px-20 relative z-10">
         <div
-          className={`text-center mb-16 transform-all duration-700 ease-out ${
+          className={`text-center mb-20 transition-all duration-700 ease-out ${
             visibleItems.header
               ? "opacity-100 translate-y-0"
               : "opacity-0 -translate-y-10"
@@ -119,54 +141,94 @@ const HowItWorksSection = () => {
           data-id="header"
         >
           <h2 className="text-3xl md:text-4xl font-bold mb-4 neon-text">
-            How <span className="text-cyan-400">MoniX</span> Works
+            How MoniX Works
           </h2>
-          <p className="text-white/70 max-w-2xl mx-auto">
+          <p className="text-white/70 max-w-2xl mx-auto text-lg">
             Getting started with Monix is easy. Follow these simple steps to
             begin your financial journey.
           </p>
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 relative">
-          {steps.map((step, index) => (
-            <div key={index} className="relative">
-              {index < steps.length - 1 && (
-                <div
-                  className="hidden lg:block absolute top-14 left-[calc(50%+40px)] h-0.5 bg-gradient-to-r from-[#00FFFF] to-[#8A2BE2] origin-left transition-all duration-1000 ease-out"
-                  style={{
-                    width: visibleItems.lines[index]
-                      ? "calc(100% - 80px)"
-                      : "0%",
-                    transitionDelay: `${index * 200 + 300}ms`,
-                  }}
-                ></div>
-              )}
-
-              <div
-                className={`text-center relative z-10 transition-all duration-700 ease-out ${
-                  visibleItems.steps[index]
-                    ? "opacity-100 transform translate-y-0"
-                    : "opacity-0 transform translate-y-16"
-                }`}
-                style={{ transitionDelay: `${index * 200}ms` }}
-                data-id={`step-${index}`}
-              >
-                <div className="w-28 h-28 mx-auto mb-6 bg-gradient-to-br from-[#00FFFF] to-[#600ab0] rounded-full flex items-center justify-center shadow-[0_0_15px_rgba(0,255,255,0.5)]">
-                  <div className="w-24 h-24 bg-[#1A1F3C] rounded-full flex items-center justify-center">
-                    <span className="text-2xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-[#00FFFF] to-[#8A2BE2]">
-                      {step.number}
-                    </span>
+          {steps.map((step, index) => {
+            const IconComponent = step.icon;
+            return (
+              <div key={index} className="relative group perspective-1000">
+                {/* Enhanced Connection Line */}
+                {index < steps.length - 1 && (
+                  <div className="hidden lg:flex absolute top-1/2 left-[calc(100%+1rem)] w-8 h-0.5 items-center justify-center z-20">
+                    <div
+                      className={`w-full h-px bg-gradient-to-r from-primary/60 via-primary/40 to-transparent transition-all duration-700 ${
+                        visibleItems.lines[index]
+                          ? "opacity-100 scale-x-100"
+                          : "opacity-0 scale-x-0"
+                      }`}
+                    ></div>
+                    <ArrowRight
+                      className={`absolute right-0 w-4 h-4 text-primary/70 transition-all duration-500 ${
+                        visibleItems.lines[index]
+                          ? "opacity-100 translate-x-0"
+                          : "opacity-0 -translate-x-2"
+                      }`}
+                      style={{ transitionDelay: `${index * 200 + 400}ms` }}
+                    />
                   </div>
-                </div>
+                )}
 
-                <h3 className="text-xl font-semibold mb-3 text-white">
-                  {step.title}
-                </h3>
-                <p className="text-white/70">{step.description}</p>
+                <div
+                  className={`step-card-3d h-full transform-gpu transition-all duration-700 ease-out ${
+                    visibleItems.steps[index]
+                      ? "opacity-100 translate-y-0 rotate-x-0"
+                      : "opacity-0 translate-y-20 rotate-x-12"
+                  }`}
+                  style={{
+                    transitionDelay: `${index * 200}ms`,
+                    transformStyle: "preserve-3d",
+                  }}
+                  data-id={`step-${index}`}
+                >
+                  <Card className="relative h-full backdrop-blur-md bg-white/5 border border-white/20 shadow-lg group-hover:shadow-xl group-hover:scale-105 transition-all duration-500 overflow-hidden">
+                    <CardHeader className="relative z-10 text-center pb-6 pt-8">
+                      {/* Icon Container with colorful background */}
+                      <div className="relative mx-auto mb-6">
+                        <div
+                          className={`w-16 h-16 mx-auto rounded-xl bg-gradient-to-br ${step.accentColor} p-0.5 shadow-lg group-hover:shadow-xl transition-all duration-500 group-hover:scale-110`}
+                        >
+                          <div className="w-full h-full rounded-xl bg-gray-900/80 backdrop-blur-sm flex items-center justify-center">
+                            <IconComponent className="w-7 h-7 text-white drop-shadow-lg" />
+                          </div>
+                        </div>
+
+                        {/* Step number overlay */}
+                        <div className="absolute -top-2 -right-2 w-6 h-6 rounded-full bg-primary flex items-center justify-center text-xs font-bold text-white shadow-lg">
+                          {step.number}
+                        </div>
+                      </div>
+
+                      <CardTitle className="text-lg font-semibold text-white group-hover:text-primary transition-colors duration-300">
+                        {step.title}
+                      </CardTitle>
+                    </CardHeader>
+
+                    <CardContent className="relative z-10 text-center pt-0 pb-8 px-6">
+                      <p className="text-white/70 text-sm leading-relaxed group-hover:text-white/85 transition-colors duration-300">
+                        {step.description}
+                      </p>
+                    </CardContent>
+
+                    {/* Bottom accent line */}
+                    <div className="absolute bottom-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-primary/30 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+                  </Card>
+                </div>
               </div>
-            </div>
-          ))}
+            );
+          })}
         </div>
+
+        {/* Additional floating elements for depth */}
+        <div className="absolute top-20 right-10 w-2 h-2 bg-cyan-400/30 rounded-full animate-pulse"></div>
+        <div className="absolute bottom-32 left-16 w-1 h-1 bg-purple-400/40 rounded-full animate-pulse delay-1000"></div>
+        <div className="absolute top-1/3 left-8 w-1.5 h-1.5 bg-blue-400/35 rounded-full animate-pulse delay-500"></div>
       </div>
     </section>
   );

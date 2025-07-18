@@ -89,12 +89,7 @@ const TestimonialsSection = () => {
           >
             What Our Users Say
           </h2>
-          <div
-            className={[
-              "h-1 w-24 bg-gradient-to-r from-cyan-400 to-purple-500 rounded-full mx-auto mt-2 transition-all duration-1000 ease-out",
-              !isVisible ? "w-0 opacity-0" : "w-24 opacity-100",
-            ].join(" ")}
-          ></div>
+
           <p
             className={[
               "text-gray-400 mt-4 max-w-2xl mx-auto transition-all duration-1000 delay-200",

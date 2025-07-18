@@ -340,3 +340,29 @@
 .animate-delay-500 {
   animation-delay: 500ms;
 }
+/* Add to your globals.css file */
+.perspective-1000 {
+  perspective: 1000px;
+}
+
+.rotate-x-12 {
+  transform: rotateX(12deg);
+}
+
+.rotate-x-0 {
+  transform: rotateX(0deg);
+}
+
+.step-card-3d {
+  transform-style: preserve-3d;
+}
+
+.step-card-3d:hover {
+  transform: translateY(-8px) rotateY(5deg) rotateX(-2deg);
+}
+
+.shadow-3xl {
+  box-shadow:
+    0 35px 60px -12px rgba(0, 0, 0, 0.25),
+    0 0 30px rgba(34, 211, 238, 0.1);
+}
