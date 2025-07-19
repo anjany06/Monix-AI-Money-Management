@@ -17,6 +17,7 @@ const steps = [
       "Get started in minutes with our simple and secure sign-up process.",
     icon: User,
     accentColor: "from-blue-500 to-cyan-500",
+    glowColor: "blue-500", // For glow effects
   },
   {
     number: "02",
@@ -25,6 +26,7 @@ const steps = [
       "Automatically categorize and track your transactions in real-time.",
     icon: BarChart3,
     accentColor: "from-emerald-500 to-teal-500",
+    glowColor: "emerald-500",
   },
   {
     number: "03",
@@ -33,6 +35,7 @@ const steps = [
       "Receive AI-powered recommendations tailored to your spending habits.",
     icon: Lightbulb,
     accentColor: "from-yellow-500 to-orange-500",
+    glowColor: "yellow-500",
   },
   {
     number: "04",
@@ -40,6 +43,7 @@ const steps = [
     description: "Track your progress and watch your financial health improve.",
     icon: TrendingUp,
     accentColor: "from-purple-500 to-pink-500",
+    glowColor: "purple-500",
   },
 ];
 
@@ -188,19 +192,59 @@ const HowItWorksSection = () => {
                   data-id={`step-${index}`}
                 >
                   <Card className="relative h-full backdrop-blur-md bg-white/5 border border-white/20 shadow-lg group-hover:shadow-xl group-hover:scale-105 transition-all duration-500 overflow-hidden">
+                    {/* Hover background glow with native color */}
+                    <div
+                      className={`absolute inset-0 bg-gradient-to-br ${step.accentColor} opacity-0 group-hover:opacity-10 transition-opacity duration-500 rounded-xl`}
+                    ></div>
+
+                    {/* Enhanced border glow on hover */}
+                    <div
+                      className={`absolute inset-0 rounded-xl bg-gradient-to-br ${step.accentColor} opacity-0 group-hover:opacity-20 blur-sm scale-105 transition-opacity duration-500`}
+                    ></div>
+
                     <CardHeader className="relative z-10 text-center pb-6 pt-8">
-                      {/* Icon Container with colorful background */}
+                      {/* Icon Container with colorful background and enhanced glow */}
                       <div className="relative mx-auto mb-6">
+                        {/* Outer glow effect */}
                         <div
-                          className={`w-16 h-16 mx-auto rounded-xl bg-gradient-to-br ${step.accentColor} p-0.5 shadow-lg group-hover:shadow-xl transition-all duration-500 group-hover:scale-110`}
+                          className={`absolute inset-0 w-16 h-16 mx-auto rounded-xl bg-gradient-to-br ${step.accentColor} opacity-0 group-hover:opacity-40 blur-lg scale-125 transition-all duration-500`}
+                        ></div>
+
+                        <div
+                          className={`relative w-16 h-16 mx-auto rounded-xl bg-gradient-to-br ${step.accentColor} p-0.5 shadow-lg group-hover:shadow-xl transition-all duration-500 group-hover:scale-110`}
+                          style={{
+                            filter: `drop-shadow(0 0 10px ${
+                              step.glowColor === "blue-500"
+                                ? "#3b82f6"
+                                : step.glowColor === "emerald-500"
+                                  ? "#10b981"
+                                  : step.glowColor === "yellow-500"
+                                    ? "#eab308"
+                                    : "#a855f7"
+                            }40)`,
+                            transition: "all 0.5s ease",
+                          }}
                         >
-                          <div className="w-full h-full rounded-xl bg-gray-900/80 backdrop-blur-sm flex items-center justify-center">
-                            <IconComponent className="w-7 h-7 text-white drop-shadow-lg" />
+                          <div className="w-full h-full rounded-xl bg-gray-900/80 backdrop-blur-sm flex items-center justify-center group-hover:bg-gray-900/60 transition-colors duration-500">
+                            <IconComponent className="w-7 h-7 text-white drop-shadow-lg group-hover:scale-110 transition-transform duration-300" />
                           </div>
                         </div>
 
-                        {/* Step number overlay */}
-                        <div className="absolute -top-2 -right-2 w-6 h-6 rounded-full bg-primary flex items-center justify-center text-xs font-bold text-white shadow-lg">
+                        {/* Step number overlay with matching glow */}
+                        <div
+                          className={`absolute -top-2 -right-2 w-6 h-6 rounded-full bg-gradient-to-br ${step.accentColor} flex items-center justify-center text-xs font-bold text-white shadow-lg group-hover:shadow-xl transition-all duration-300`}
+                          style={{
+                            filter: `drop-shadow(0 0 8px ${
+                              step.glowColor === "blue-500"
+                                ? "#3b82f6"
+                                : step.glowColor === "emerald-500"
+                                  ? "#10b981"
+                                  : step.glowColor === "yellow-500"
+                                    ? "#eab308"
+                                    : "#a855f7"
+                            }60)`,
+                          }}
+                        >
                           {step.number}
                         </div>
                       </div>
@@ -216,8 +260,10 @@ const HowItWorksSection = () => {
                       </p>
                     </CardContent>
 
-                    {/* Bottom accent line */}
-                    <div className="absolute bottom-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-primary/30 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+                    {/* Bottom accent line with native color */}
+                    <div
+                      className={`absolute bottom-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-${step.glowColor}/50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500`}
+                    ></div>
                   </Card>
                 </div>
               </div>
