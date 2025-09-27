@@ -13,7 +13,7 @@ import * as React from "react";
 
 export default function EmailTemplate({
   userName = "",
-  type = "monthly-report",
+  type = "budget-alert",
   data = {},
 }) {
   if (type === "monthly-report") {
@@ -89,7 +89,7 @@ export default function EmailTemplate({
             <Heading style={styles.title}>Budget Alert</Heading>
             <Text style={styles.text}>Hello {userName},</Text>
             <Text style={styles.text}>
-              You&rsquo;ve used {data?.percentageUsed.toFixed(1)}% of your
+              You&rsquo;ve used {data?.percentageUsed?.toFixed(1)}% of your
               monthly budget.
             </Text>
             <Section style={styles.statsContainer}>

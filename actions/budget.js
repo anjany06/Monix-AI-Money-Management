@@ -27,20 +27,19 @@ export async function getCurrentBudget(accountId) {
     });
 
     //current month expense
-
     const currentDate = new Date();
-    const startOfMonth = startOfDay(currentDate);
-    const endOfMonth = endOfDay(currentDate);
-    // const startOfMonth = new Date(
-    //   currentDate.getFullYear(),
-    //   currentDate.getMonth(),
-    //
-    // );
-    // const endOfMonth = new Date(
-    //   currentDate.getFullYear(),
-    //   currentDate.getMonth() + 1,
-    //   0
-    // );
+    // const startOfMonth = startOfDay(currentDate);
+    // const endOfMonth = endOfDay(currentDate);
+    const startOfMonth = new Date(
+      currentDate.getFullYear(),
+      currentDate.getMonth(),
+    
+    );
+    const endOfMonth = new Date(
+      currentDate.getFullYear(),
+      currentDate.getMonth() + 1,
+      0
+    );
 
     const expenses = await db.transaction.aggregate({
       where: {
