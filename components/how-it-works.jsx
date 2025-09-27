@@ -157,7 +157,7 @@ const HowItWorksSection = () => {
           {steps.map((step, index) => {
             const IconComponent = step.icon;
             return (
-              <div key={index} className="relative group perspective-1000">
+              <div key={index} className="relative perspective-1000">
                 {/* Enhanced Connection Line */}
                 {index < steps.length - 1 && (
                   <div className="hidden lg:flex absolute top-1/2 left-[calc(100%+1rem)] w-8 h-0.5 items-center justify-center z-20">
@@ -191,27 +191,12 @@ const HowItWorksSection = () => {
                   }}
                   data-id={`step-${index}`}
                 >
-                  <Card className="relative h-full backdrop-blur-md bg-white/5 border border-white/20 shadow-lg group-hover:shadow-xl group-hover:scale-105 transition-all duration-500 overflow-hidden">
-                    {/* Hover background glow with native color */}
-                    <div
-                      className={`absolute inset-0 bg-gradient-to-br ${step.accentColor} opacity-0 group-hover:opacity-10 transition-opacity duration-500 rounded-xl`}
-                    ></div>
-
-                    {/* Enhanced border glow on hover */}
-                    <div
-                      className={`absolute inset-0 rounded-xl bg-gradient-to-br ${step.accentColor} opacity-0 group-hover:opacity-20 blur-sm scale-105 transition-opacity duration-500`}
-                    ></div>
-
+                  <Card className="relative h-full backdrop-blur-md bg-white/5 border border-white/20 shadow-lg transition-all duration-500 overflow-hidden">
                     <CardHeader className="relative z-10 text-center pb-6 pt-8">
-                      {/* Icon Container with colorful background and enhanced glow */}
+                      {/* Icon Container with colorful background */}
                       <div className="relative mx-auto mb-6">
-                        {/* Outer glow effect */}
                         <div
-                          className={`absolute inset-0 w-16 h-16 mx-auto rounded-xl bg-gradient-to-br ${step.accentColor} opacity-0 group-hover:opacity-40 blur-lg scale-125 transition-all duration-500`}
-                        ></div>
-
-                        <div
-                          className={`relative w-16 h-16 mx-auto rounded-xl bg-gradient-to-br ${step.accentColor} p-0.5 shadow-lg group-hover:shadow-xl transition-all duration-500 group-hover:scale-110`}
+                          className={`w-16 h-16 mx-auto rounded-xl bg-gradient-to-br ${step.accentColor} p-0.5 shadow-lg transition-all duration-500`}
                           style={{
                             filter: `drop-shadow(0 0 10px ${
                               step.glowColor === "blue-500"
@@ -225,14 +210,14 @@ const HowItWorksSection = () => {
                             transition: "all 0.5s ease",
                           }}
                         >
-                          <div className="w-full h-full rounded-xl bg-gray-900/80 backdrop-blur-sm flex items-center justify-center group-hover:bg-gray-900/60 transition-colors duration-500">
-                            <IconComponent className="w-7 h-7 text-white drop-shadow-lg group-hover:scale-110 transition-transform duration-300" />
+                          <div className="w-full h-full rounded-xl bg-gray-900/80 backdrop-blur-sm flex items-center justify-center transition-colors duration-500">
+                            <IconComponent className="w-7 h-7 text-white drop-shadow-lg transition-transform duration-300" />
                           </div>
                         </div>
 
-                        {/* Step number overlay with matching glow */}
+                        {/* Step number overlay */}
                         <div
-                          className={`absolute -top-2 -right-2 w-6 h-6 rounded-full bg-gradient-to-br ${step.accentColor} flex items-center justify-center text-xs font-bold text-white shadow-lg group-hover:shadow-xl transition-all duration-300`}
+                          className={`absolute -top-2 -right-2 w-6 h-6 rounded-full bg-gradient-to-br ${step.accentColor} flex items-center justify-center text-xs font-bold text-white shadow-lg transition-all duration-300`}
                           style={{
                             filter: `drop-shadow(0 0 8px ${
                               step.glowColor === "blue-500"
@@ -249,21 +234,16 @@ const HowItWorksSection = () => {
                         </div>
                       </div>
 
-                      <CardTitle className="text-lg font-semibold text-white group-hover:text-primary transition-colors duration-300">
+                      <CardTitle className="text-lg font-semibold text-white transition-colors duration-300">
                         {step.title}
                       </CardTitle>
                     </CardHeader>
 
                     <CardContent className="relative z-10 text-center pt-0 pb-8 px-6">
-                      <p className="text-white/70 text-sm leading-relaxed group-hover:text-white/85 transition-colors duration-300">
+                      <p className="text-white/70 text-sm leading-relaxed transition-colors duration-300">
                         {step.description}
                       </p>
                     </CardContent>
-
-                    {/* Bottom accent line with native color */}
-                    <div
-                      className={`absolute bottom-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-${step.glowColor}/50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500`}
-                    ></div>
                   </Card>
                 </div>
               </div>
