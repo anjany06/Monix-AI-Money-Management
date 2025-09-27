@@ -2,18 +2,15 @@
 
 import { db } from "@/lib/prisma";
 import { auth } from "@clerk/nextjs/server";
-import { endOfDay, startOfDay } from "date-fns";
 import { revalidatePath } from "next/cache";
 
 export async function getCurrentBudget(accountId) {
   try {
     const { userId } = await auth();
-    if (!userId) throw new Error("Unauthorised");
+    if (!userId) throw new Error("Unauthorized");
 
     const user = await db.user.findUnique({
-      where: {
-        clerkUserId: userId,
-      },
+      where: { clerkUserId: userId },
     });
 
     if (!user) {
@@ -26,14 +23,12 @@ export async function getCurrentBudget(accountId) {
       },
     });
 
-    //current month expense
+    // Get current month's expenses
     const currentDate = new Date();
-    // const startOfMonth = startOfDay(currentDate);
-    // const endOfMonth = endOfDay(currentDate);
     const startOfMonth = new Date(
       currentDate.getFullYear(),
       currentDate.getMonth(),
-    
+      1
     );
     const endOfMonth = new Date(
       currentDate.getFullYear(),
@@ -64,35 +59,32 @@ export async function getCurrentBudget(accountId) {
     };
   } catch (error) {
     console.error("Error fetching budget:", error);
-    return { success: false, error: error.message };
+    throw error;
   }
 }
 
 export async function updateBudget(amount) {
   try {
     const { userId } = await auth();
-    if (!userId) throw new Error("Unauthorised");
+    if (!userId) throw new Error("Unauthorized");
 
     const user = await db.user.findUnique({
-      where: {
-        clerkUserId: userId,
-      },
+      where: { clerkUserId: userId },
     });
 
-    if (!user) {
-      throw new Error("User not found");
-    }
+    if (!user) throw new Error("User not found");
 
+    // Update or create budget
     const budget = await db.budget.upsert({
       where: {
         userId: user.id,
       },
       update: {
-        amount: amount,
+        amount,
       },
       create: {
         userId: user.id,
-        amount: amount,
+        amount,
       },
     });
 
