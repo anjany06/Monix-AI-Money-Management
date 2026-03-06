@@ -1,6 +1,6 @@
 {
   "name": "money",
-  "version": "0.1.0",
+  "version": "0.1.1", // bumped version for PR test
   "private": true,
   "scripts": {
     "dev": "next dev --turbopack",
@@ -8,7 +8,8 @@
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
-    "postinstall": "prisma generate"
+    "postinstall": "prisma generate",
+    "test": "echo \"no tests yet\" && exit 0"
   },
   "dependencies": {
     "@arcjet/inspect": "^1.0.0-beta.5",

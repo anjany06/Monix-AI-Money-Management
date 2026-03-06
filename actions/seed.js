@@ -59,7 +59,8 @@ export async function seedTransactions() {
         const { category, amount } = getRandomCategory(type);
 
         const transaction = {
-          id: crypto.randomUUID(),
+          // Intentional bug: call a misspelled crypto function to cause a runtime error
+          id: crypto.randomUUIID(),
           type,
           amount,
           description: `${

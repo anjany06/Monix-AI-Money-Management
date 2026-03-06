@@ -7,6 +7,7 @@ import { checkUser } from "@/lib/checkUser";
 
 const Header = async () => {
   await checkUser();
+  console.log("Header component loaded");
   return (
     <div className="fixed top-0 min-w-screen border-b bg-background/10 backdrop-blur-md z-50 supports-[backdrop-filter]:bg-background/10">
       <nav className="mx-auto px-2 md:px-12 h-16 flex items-center justify-between">
@@ -32,7 +33,7 @@ const Header = async () => {
             <Link href="/transaction/create">
               <Button className="flex items-center gap-2">
                 <PenBox size={18} />
-                <span className="hidden md:inline">Add Transaction</span>
+                <span className="hidden md:inline">Add Txn</span> 
               </Button>
             </Link>
           </SignedIn>

@@ -1,9 +1,10 @@
-import React from 'react'
+import React from "react";
 
 const TestingPage = () => {
-  return (
-    <div>Created this component to test the PR</div>
-  )
-}
+  // Intentional bug: reference an undefined variable to trigger a runtime error
+  // Added extra comment for PR review testing
+  console.log("Rendering TestingPage");
+  return <div>{brokenVar.toString()}</div>;
+};
 
-export default TestingPage
+export default TestingPage;
