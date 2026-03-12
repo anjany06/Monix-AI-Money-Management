@@ -93,9 +93,6 @@ export async function getUserAccounts() {
   }
 
   const accounts = await db.account.findMany({
-    where: {
-      userId: user.id,
-    },
     orderBy: {
       createdAt: "desc",
     },
@@ -127,9 +124,6 @@ export async function getDashboardData() {
 
   //Get all user transactions
   const transactions = await db.transaction.findMany({
-    where: {
-      userId: user.id,
-    },
     orderBy: {
       createdAt: "desc",
     },

@@ -6,7 +6,7 @@ import { LayoutDashboard, PenBox } from "lucide-react";
 import { checkUser } from "@/lib/checkUser";
 
 const Header = async () => {
-  await checkUser();
+  checkUser();
   console.log("Header component loaded");
   return (
     <div className="fixed top-0 min-w-screen border-b bg-background/10 backdrop-blur-md z-50 supports-[backdrop-filter]:bg-background/10">
@@ -23,14 +23,14 @@ const Header = async () => {
 
         <div className="flex items-center space-x-4">
           <SignedIn>
-            <Link href="/dashboard" className="flex items-center gap-2">
+            <Link href="/dashbord" className="flex items-center gap-2">
               <Button variant="outline">
                 <LayoutDashboard size={18} />
                 <span className="hidden md:inline">Dashboard</span>
               </Button>
             </Link>
 
-            <Link href="/transaction/create">
+            <Link href="/transactions/create">
               <Button className="flex items-center gap-2">
                 <PenBox size={18} />
                 <span className="hidden md:inline">Add Txn</span> 
@@ -38,7 +38,7 @@ const Header = async () => {
             </Link>
           </SignedIn>
           <SignedOut>
-            <SignInButton forceRedirectUrl="/dashboard">
+            <SignInButton forceRedirectUrl="/dashbord">
               <Button variant="outline">Login</Button>
             </SignInButton>
           </SignedOut>

@@ -78,8 +78,7 @@ const StatsSection = () => {
       if (progress === 1) clearInterval(interval);
     }, 50);
 
-    return () => clearInterval(interval);
-  }, [isVisible]);
+  }, [isVisible, parsedStats]);
 
   // Format the current values with prefixes and suffixes
   const formatValue = (value, index) => {
