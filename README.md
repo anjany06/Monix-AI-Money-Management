@@ -92,12 +92,6 @@ npm run dev
    ```
 6. Open a pull request.
 
-### 📌 Suggested Contributions
-- Improve **AI Categorization** – Train smarter models with more datasets.
-- Add **Currency Conversion** – Enable multi-currency budget management.
-- Expand **Insight Reports** – More in-depth monthly AI analytics.
-- Enhance **Receipt OCR** – Improve accuracy of scanned data.
-
 ## 🌟 Stargazers & Forkers
 We appreciate your support! 🌟🍴
 
