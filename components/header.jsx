@@ -38,7 +38,9 @@ const Header = async () => {
           </SignedIn>
           <SignedOut>
             <SignInButton forceRedirectUrl="/dashboard">
-              <Button variant="outline">Login</Button>
+              <button className="px-5 py-2 rounded-xl bg-blue-600 border-b-4 border-blue-800 text-white font-bold transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_8px_20px_rgba(0,0,0,0.3)] active:border-b-0 active:translate-y-1 shadow-[0_5px_15px_rgba(0,0,0,0.25)]">
+                Login
+              </button>
             </SignInButton>
           </SignedOut>
           <SignedIn>

@@ -125,6 +125,7 @@
   * {
     @apply border-border outline-ring/50;
   }
+
   body {
     @apply bg-background text-foreground;
     font-family: "Rajdhani", sans-serif;
@@ -140,27 +141,11 @@
     @apply backdrop-blur-lg bg-white/10 border border-white/20 shadow-lg;
   }
 
-  .neon-glow {
-    @apply relative;
-    box-shadow:
-      0 0 5px theme("colors.primary.DEFAULT"),
-      0 0 10px theme("colors.primary.DEFAULT"),
-      0 0 15px theme("colors.secondary.DEFAULT");
-  }
-
-  .neon-text {
-    text-shadow:
-      0 0 5px theme("colors.primary.DEFAULT"),
-      0 0 10px theme("colors.primary.DEFAULT"),
-      0 0 15px theme("colors.secondary.DEFAULT");
-  }
 
   .beam-bg {
-    background-image: radial-gradient(
-      circle at 50% 50%,
-      rgba(51, 195, 240, 0.1) 0%,
-      rgba(51, 195, 240, 0) 70%
-    );
+    background-image: radial-gradient(circle at 50% 50%,
+        rgba(51, 195, 240, 0.1) 0%,
+        rgba(51, 195, 240, 0) 70%);
   }
 }
 
@@ -168,9 +153,11 @@
   0% {
     background-position: 0% 50%;
   }
+
   50% {
     background-position: 100% 50%;
   }
+
   100% {
     background-position: 0% 50%;
   }
@@ -180,9 +167,11 @@
   0% {
     transform: translateY(0px);
   }
+
   50% {
     transform: translateY(-10px);
   }
+
   100% {
     transform: translateY(0px);
   }
@@ -192,9 +181,11 @@
   0% {
     opacity: 0.6;
   }
+
   50% {
     opacity: 1;
   }
+
   100% {
     opacity: 0.6;
   }
@@ -205,62 +196,53 @@
     opacity: 0;
     transform: translateY(20px);
   }
+
   100% {
     opacity: 1;
     transform: translateY(0);
   }
 }
+
 @layer components {
   .glass-card {
     @apply bg-black bg-white/5 backdrop-blur-lg border border-white/10 rounded-xl shadow-lg;
     box-shadow:
-      0 4px 24px -1px rgba(0, 0, 0, 0.2),
-      0 0 1px 0 rgba(0, 229, 255, 0.1);
+      0 4px 24px -1px rgba(0, 0, 0, 0.2);
   }
 
   .neon-border {
     @apply relative rounded-xl overflow-hidden;
-    box-shadow:
-      0 0 5px rgba(0, 229, 255, 0.5),
-      0 0 20px rgba(0, 229, 255, 0.15);
   }
 
   .neon-border-purple {
     @apply relative rounded-xl overflow-hidden;
-    box-shadow:
-      0 0 5px rgba(155, 48, 255, 0.5),
-      0 0 20px rgba(155, 48, 255, 0.15);
   }
 
   .neon-text-cyan {
     @apply text-cyan-400;
-    text-shadow: 0 0 8px rgba(0, 229, 255, 0.8);
   }
 
   .neon-text-purple {
     @apply text-purple-400;
-    text-shadow: 0 0 8px rgba(155, 48, 255, 0.8);
   }
 
   .neon-glow-button {
-    @apply relative overflow-hidden rounded-lg bg-gradient-to-r from-cyan-500/20 to-blue-500/20 px-5 py-2 text-white transition-all duration-300 hover:shadow-[0_0_25px_rgba(0,229,255,0.5)] hover:from-cyan-500/40 hover:to-blue-500/40;
+    @apply relative overflow-hidden rounded-lg bg-blue-500/20 px-5 py-2 text-white transition-all duration-300 hover:bg-blue-500/40;
   }
+
   .expense-text {
     @apply text-red-400;
-    text-shadow: 0 0 8px rgba(239, 68, 68, 0.5);
   }
 
   .income-text {
     @apply text-green-400;
-    text-shadow: 0 0 8px rgba(34, 197, 94, 0.5);
   }
+
   .beam-bg {
-    background: radial-gradient(
-      circle,
-      rgba(56, 182, 255, 0.15) 0%,
-      rgba(56, 182, 255, 0.03) 70%,
-      transparent 100%
-    );
+    background: radial-gradient(circle,
+        rgba(56, 182, 255, 0.15) 0%,
+        rgba(56, 182, 255, 0.03) 70%,
+        transparent 100%);
     border-radius: 50%;
   }
 }
@@ -270,6 +252,7 @@
     transform: translateY(20px);
     opacity: 0;
   }
+
   to {
     transform: translateY(0);
     opacity: 1;
@@ -277,23 +260,28 @@
 }
 
 @keyframes pulseGlow {
+
   0%,
   100% {
     box-shadow:
       0 0 5px rgba(0, 229, 255, 0.5),
       0 0 20px rgba(0, 229, 255, 0.15);
   }
+
   50% {
     box-shadow:
       0 0 8px rgba(0, 229, 255, 0.8),
       0 0 30px rgba(0, 229, 255, 0.3);
   }
 }
+
 @keyframes pulse-slow {
+
   0%,
   100% {
     opacity: 0.1;
   }
+
   50% {
     opacity: 1;
   }
@@ -302,6 +290,7 @@
 .animate-pulse-slow {
   animation: pulse-slow 4s ease-in-out infinite;
 }
+
 .animate-gradient {
   background-size: 200% 200%;
   animation: gradientMove 3s ease infinite;
@@ -310,6 +299,7 @@
 .animate-float {
   animation: float 6s ease-in-out infinite;
 }
+
 .animate-pulse {
   animation: pulse 4s ease-in-out infinite;
 }
@@ -321,6 +311,7 @@
 .animate-fadeInUp {
   animation: fadeInUp 0.5s ease-out forwards;
 }
+
 .animate-delay-100 {
   animation-delay: 100ms;
 }
@@ -340,6 +331,7 @@
 .animate-delay-500 {
   animation-delay: 500ms;
 }
+
 /* Add to your globals.css file */
 .perspective-1000 {
   perspective: 1000px;
@@ -363,6 +355,5 @@
 
 .shadow-3xl {
   box-shadow:
-    0 35px 60px -12px rgba(0, 0, 0, 0.25),
-    0 0 30px rgba(34, 211, 238, 0.1);
+    0 35px 60px -12px rgba(0, 0, 0, 0.25);
 }

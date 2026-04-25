@@ -12,8 +12,7 @@ const HeroSection1 = () => {
     <div className="relative min-h-screen w-full overflow-hidden bg-gradient-to-br from-[#1A1F2C] to-[#121418]">
       <Particles />
 
-      <div className="absolute top-1/4 left-1/4 w-72 h-72 bg-blue-500 rounded-full opacity-10 blur-[100px]"></div>
-      <div className="absolute top-1/2 left-2/3 w-64 h-64 bg-cyan-400 rounded-full opacity-10 blur-[100px]"></div>
+      {/* Background effects removed */}
 
       <div className="container relative mx-auto px-4 md:px-20 py-24">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
