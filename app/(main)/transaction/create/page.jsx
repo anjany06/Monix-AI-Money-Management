@@ -1,12 +1,15 @@
 import { getUserAccounts } from "@/actions/dashboard";
 import { defaultCategories } from "@/data/categories";
-import React from "react";
+import React, { Suspense } from "react";
 import AddTransactionForm from "../_components/transaction-form";
 import { getTransaction } from "@/actions/transactions";
 
+export const dynamic = "force-dynamic";
+
 const AddTransaction = async ({ searchParams }) => {
   const accounts = await getUserAccounts();
-  const editId = searchParams?.edit;
+  const resolvedParams = await searchParams;
+  const editId = resolvedParams?.edit;
   // console.log(editId);
 
   let initialData = null;
