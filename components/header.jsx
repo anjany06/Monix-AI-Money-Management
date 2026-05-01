@@ -21,7 +21,7 @@ const Header = async () => {
         </Link>
 
         <div className="flex items-center space-x-4">
-          <Show when="signedIn">
+          <Show when="signed-in">
             <Link href="/dashboard" className="flex items-center gap-2">
               <Button variant="outline">
                 <LayoutDashboard size={18} />
@@ -36,14 +36,14 @@ const Header = async () => {
               </Button>
             </Link>
           </Show>
-          <Show when="signedOut">
+
+          <Show when="signed-out">
             <SignInButton forceRedirectUrl="/dashboard">
-              <button className="px-5 py-2 rounded-xl bg-blue-600 border-b-4 border-blue-800 text-white font-bold transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_8px_20px_rgba(0,0,0,0.3)] active:border-b-0 active:translate-y-1 shadow-[0_5px_15px_rgba(0,0,0,0.25)]">
-                Login
-              </button>
+              <button className="px-5 py-2 rounded-xl bg-blue-600 border-b-4 border-blue-800 text-white font-bold transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_8px_20px_rgba(0,0,0,0.3)] active:border-b-0 active:translate-y-1 shadow-[0_5px_15px_rgba(0,0,0,0.25)]">Login</button>
             </SignInButton>
           </Show>
-          <Show when="signedIn">
+
+          <Show when="signed-in">
             <UserButton
               appearance={{
                 elements: {
