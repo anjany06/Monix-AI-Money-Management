@@ -16,11 +16,11 @@ import {
 // Stats Data
 export const statsData = [
   {
-    value: "50K+",
+    value: "10K+",
     label: "Active Users",
   },
   {
-    value: "$2B+",
+    value: "$1M+",
     label: "Transactions Tracked",
   },
   {
@@ -36,36 +36,36 @@ export const statsData = [
 // Features Data
 export const featuresData = [
   {
-    icon: <LineChart className="h-8 w-8 text-cyan-400" />,
+    icon: <LineChart className="h-6 w-6 text-gray-400" />,
     title: "Intelligent Reporting",
     description:
       "Explore comprehensive breakdowns of your expenses through machine learning analysis",
   },
   {
-    icon: <ScanLine className="h-8 w-8 text-cyan-400" />,
+    icon: <ScanLine className="h-6 w-6 text-gray-400" />,
     title: "Quick Receipt Capture",
     description: "Instantly capture receipt information from receipt using AI",
   },
   {
-    icon: <Wallet className="h-8 w-8 text-cyan-400" />,
+    icon: <Wallet className="h-6 w-6 text-gray-400" />,
     title: "Financial Planning",
     description:
       "Set up and track spending limits with smart, personalized suggestions",
   },
   {
-    icon: <Layers className="h-8 w-8 text-cyan-400" />,
+    icon: <Layers className="h-6 w-6 text-gray-400" />,
     title: "Unified Account Management",
     description:
       "Control all your financial accounts and cards from a single dashboard",
   },
   {
-    icon: <DollarSign className="h-8 w-8 text-cyan-400" />,
+    icon: <DollarSign className="h-6 w-6 text-gray-400" />,
     title: "Global Currency Support",
     description:
       "Handle different world currencies with instant exchange rate updates",
   },
   {
-    icon: <Lightbulb className="h-8 w-8 text-cyan-400" />,
+    icon: <Lightbulb className="h-6 w-6 text-gray-400" />,
     title: "Smart Financial Tips",
     description:
       "Receive instant money tips and suggestions without lifting a finger",
@@ -97,24 +97,24 @@ export const howItWorksData = [
 // Testimonials Data
 export const testimonialsData = [
   {
-    name: "Sarah Johnson",
+    name: "Sam Johnson",
     role: "Small Business Owner",
-    image: "https://randomuser.me/api/portraits/women/75.jpg",
+    image: "https://api.dicebear.com/7.x/notionists/svg?seed=20&backgroundColor=transparent",
     quote:
-      "Welth has transformed how I manage my business finances. The AI insights have helped me identify cost-saving opportunities I never knew existed.",
+      "Monix has transformed how I manage my business finances. The AI insights have helped me identify cost-saving opportunities I never knew existed.",
   },
   {
     name: "Michael Chen",
     role: "Freelancer",
-    image: "https://randomuser.me/api/portraits/men/75.jpg",
+    image: "https://api.dicebear.com/7.x/notionists/svg?seed=16&backgroundColor=transparent",
     quote:
       "The receipt scanning feature saves me hours each month. Now I can focus on my work instead of manual data entry and expense tracking.",
   },
   {
     name: "Emily Rodriguez",
     role: "Financial Advisor",
-    image: "https://randomuser.me/api/portraits/women/74.jpg",
+    image: "https://api.dicebear.com/7.x/notionists/svg?seed=17&backgroundColor=transparent",
     quote:
-      "I recommend Welth to all my clients. The multi-currency support and detailed analytics make it perfect for international investors.",
+      "I recommend Monix to all my clients. The multi-currency support and detailed analytics make it perfect for international investors.",
   },
 ];

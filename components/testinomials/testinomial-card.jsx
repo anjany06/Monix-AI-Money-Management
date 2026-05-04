@@ -16,7 +16,7 @@ const TestimonialCard = ({ name, role, content, rating, image, className }) => {
       stars.push(
         <Star
           key={`star-${i}`}
-          className="text-cyan-400 fill-cyan-400 drop-shadow-[0_0_3px_rgba(34,211,238,0.5)]"
+          className="text-blue-400 fill-blue-400"
           size={16}
         />
       );
@@ -26,7 +26,7 @@ const TestimonialCard = ({ name, role, content, rating, image, className }) => {
       stars.push(
         <StarHalf
           key="half-star"
-          className="text-cyan-400 fill-cyan-400 drop-shadow-[0_0_3px_rgba(34,211,238,0.5)]"
+          className="text-blue-400 fill-blue-400"
           size={16}
         />
       );
@@ -39,9 +39,9 @@ const TestimonialCard = ({ name, role, content, rating, image, className }) => {
     <div
       className={[
         "relative flex flex-col p-6 backdrop-blur-md bg-white/5 border border-white/10 rounded-xl transition-all duration-300",
-        isHovered
-          ? "bg-white/10 shadow-[0_0_25px_rgba(34,211,238,0.15)] transform scale-[1.02]"
-          : "",
+          isHovered
+            ? "bg-white/10 transform scale-[1.02]"
+            : "",
         className || "",
       ].join(" ")}
       onMouseEnter={() => setIsHovered(true)}
@@ -50,8 +50,8 @@ const TestimonialCard = ({ name, role, content, rating, image, className }) => {
       <div className="absolute -top-2 -left-2">
         <Quote
           className={[
-            "text-cyan-400/40 opacity-80 transition-all duration-300",
-            isHovered ? "opacity-100 text-cyan-400/80" : "",
+            "text-blue-400/40 opacity-80 transition-all duration-300",
+            isHovered ? "opacity-100 text-blue-400/80" : "",
           ].join(" ")}
           size={40}
         />
@@ -62,7 +62,7 @@ const TestimonialCard = ({ name, role, content, rating, image, className }) => {
           className={[
             "h-12 w-12 rounded-full overflow-hidden border-2 border-white/10 transition-all duration-300",
             isHovered
-              ? "border-cyan-400/50 shadow-[0_0_15px_rgba(34,211,238,0.3)]"
+              ? "border-blue-400/50"
               : "",
           ].join(" ")}
         >
@@ -72,7 +72,7 @@ const TestimonialCard = ({ name, role, content, rating, image, className }) => {
           <h4
             className={[
               "font-medium text-white transition-all duration-300",
-              isHovered ? "text-cyan-300" : "",
+              isHovered ? "text-blue-300" : "",
             ].join(" ")}
           >
             {name}

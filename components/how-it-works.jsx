@@ -16,8 +16,6 @@ const steps = [
     description:
       "Get started in minutes with our simple and secure sign-up process.",
     icon: User,
-    accentColor: "from-blue-500 to-cyan-500",
-    glowColor: "blue-500", // For glow effects
   },
   {
     number: "02",
@@ -25,8 +23,6 @@ const steps = [
     description:
       "Automatically categorize and track your transactions in real-time.",
     icon: BarChart3,
-    accentColor: "from-emerald-500 to-teal-500",
-    glowColor: "emerald-500",
   },
   {
     number: "03",
@@ -34,16 +30,12 @@ const steps = [
     description:
       "Receive AI-powered recommendations tailored to your spending habits.",
     icon: Lightbulb,
-    accentColor: "from-yellow-500 to-orange-500",
-    glowColor: "yellow-500",
   },
   {
     number: "04",
     title: "Grow Your Wealth",
     description: "Track your progress and watch your financial health improve.",
     icon: TrendingUp,
-    accentColor: "from-purple-500 to-pink-500",
-    glowColor: "purple-500",
   },
 ];
 
@@ -130,18 +122,14 @@ const HowItWorksSection = () => {
       className="py-24 relative overflow-hidden"
       ref={sectionRef}
     >
-      {/* Enhanced background effects */}
-      <div className="absolute top-1/4 left-1/4 w-72 h-72 bg-blue-500 rounded-full opacity-10 blur-[100px]"></div>
-      <div className="absolute bottom-1/3 right-1/3 w-96 h-96 bg-indigo-600 rounded-full opacity-15 blur-[100px]"></div>
-      <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] bg-gradient-to-r from-cyan-500/5 to-purple-500/5 rounded-full blur-3xl"></div>
+      {/* Background effects removed */}
 
       <div className="container mx-auto px-4 md:px-20 relative z-10">
         <div
-          className={`text-center mb-20 transition-all duration-700 ease-out ${
-            visibleItems.header
+          className={`text-center mb-20 transition-all duration-700 ease-out ${visibleItems.header
               ? "opacity-100 translate-y-0"
               : "opacity-0 -translate-y-10"
-          }`}
+            }`}
           data-id="header"
         >
           <h2 className="text-3xl md:text-4xl font-bold mb-4 neon-text">
@@ -162,29 +150,26 @@ const HowItWorksSection = () => {
                 {index < steps.length - 1 && (
                   <div className="hidden lg:flex absolute top-1/2 left-[calc(100%+1rem)] w-8 h-0.5 items-center justify-center z-20">
                     <div
-                      className={`w-full h-px bg-gradient-to-r from-primary/60 via-primary/40 to-transparent transition-all duration-700 ${
-                        visibleItems.lines[index]
+                      className={`w-full h-px bg-gradient-to-r from-primary/60 via-primary/40 to-transparent transition-all duration-700 ${visibleItems.lines[index]
                           ? "opacity-100 scale-x-100"
                           : "opacity-0 scale-x-0"
-                      }`}
+                        }`}
                     ></div>
                     <ArrowRight
-                      className={`absolute right-0 w-4 h-4 text-primary/70 transition-all duration-500 ${
-                        visibleItems.lines[index]
+                      className={`absolute right-0 w-4 h-4 text-primary/70 transition-all duration-500 ${visibleItems.lines[index]
                           ? "opacity-100 translate-x-0"
                           : "opacity-0 -translate-x-2"
-                      }`}
+                        }`}
                       style={{ transitionDelay: `${index * 200 + 400}ms` }}
                     />
                   </div>
                 )}
 
                 <div
-                  className={`step-card-3d h-full transform-gpu transition-all duration-700 ease-out ${
-                    visibleItems.steps[index]
+                  className={`step-card-3d h-full transform-gpu transition-all duration-700 ease-out ${visibleItems.steps[index]
                       ? "opacity-100 translate-y-0 rotate-x-0"
                       : "opacity-0 translate-y-20 rotate-x-12"
-                  }`}
+                    }`}
                   style={{
                     transitionDelay: `${index * 200}ms`,
                     transformStyle: "preserve-3d",
@@ -193,43 +178,14 @@ const HowItWorksSection = () => {
                 >
                   <Card className="relative h-full backdrop-blur-md bg-white/5 border border-white/20 shadow-lg transition-all duration-500 overflow-hidden">
                     <CardHeader className="relative z-10 text-center pb-6 pt-8">
-                      {/* Icon Container with colorful background */}
-                      <div className="relative mx-auto mb-6">
-                        <div
-                          className={`w-16 h-16 mx-auto rounded-xl bg-gradient-to-br ${step.accentColor} p-0.5 shadow-lg transition-all duration-500`}
-                          style={{
-                            filter: `drop-shadow(0 0 10px ${
-                              step.glowColor === "blue-500"
-                                ? "#3b82f6"
-                                : step.glowColor === "emerald-500"
-                                  ? "#10b981"
-                                  : step.glowColor === "yellow-500"
-                                    ? "#eab308"
-                                    : "#a855f7"
-                            }40)`,
-                            transition: "all 0.5s ease",
-                          }}
-                        >
-                          <div className="w-full h-full rounded-xl bg-gray-900/80 backdrop-blur-sm flex items-center justify-center transition-colors duration-500">
-                            <IconComponent className="w-7 h-7 text-white drop-shadow-lg transition-transform duration-300" />
-                          </div>
+                      {/* Icon Container with subtle 3D depth */}
+                      <div className="relative mx-auto mb-6 w-16 h-16 group">
+                        <div className="w-16 h-16 rounded-xl bg-blue-600 border-b-4 border-blue-800 shadow-[0_5px_15px_rgba(0,0,0,0.25)] flex items-center justify-center transition-transform duration-300 group-hover:-translate-y-1 transform-gpu">
+                          <IconComponent className="w-7 h-7 text-white drop-shadow-sm transition-transform duration-300 group-hover:scale-110" />
                         </div>
 
                         {/* Step number overlay */}
-                        <div
-                          className={`absolute -top-2 -right-2 w-6 h-6 rounded-full bg-gradient-to-br ${step.accentColor} flex items-center justify-center text-xs font-bold text-white shadow-lg transition-all duration-300`}
-                          style={{
-                            filter: `drop-shadow(0 0 8px ${
-                              step.glowColor === "blue-500"
-                                ? "#3b82f6"
-                                : step.glowColor === "emerald-500"
-                                  ? "#10b981"
-                                  : step.glowColor === "yellow-500"
-                                    ? "#eab308"
-                                    : "#a855f7"
-                            }60)`,
-                          }}
-                        >
+                        <div className="absolute -top-2 -right-2 w-6 h-6 rounded-full bg-slate-800 border-2 border-blue-500 flex items-center justify-center text-xs font-bold text-white shadow-md">
                           {step.number}
                         </div>
                       </div>
