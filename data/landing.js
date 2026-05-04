@@ -16,11 +16,11 @@ import {
 // Stats Data
 export const statsData = [
   {
-    value: "50K+",
+    value: "10K+",
     label: "Active Users",
   },
   {
-    value: "$2B+",
+    value: "$1M+",
     label: "Transactions Tracked",
   },
   {
@@ -99,7 +99,7 @@ export const testimonialsData = [
   {
     name: "Sam Johnson",
     role: "Small Business Owner",
-    image: "https://api.dicebear.com/7.x/notionists/svg?seed=15&backgroundColor=transparent",
+    image: "https://api.dicebear.com/7.x/notionists/svg?seed=20&backgroundColor=transparent",
     quote:
       "Monix has transformed how I manage my business finances. The AI insights have helped me identify cost-saving opportunities I never knew existed.",
   },

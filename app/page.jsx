@@ -4,7 +4,7 @@ import React, { useEffect, useState, useRef } from "react";
 import { motion, useInView } from "motion/react";
 import Link from "next/link";
 import { ArrowUpRight, Play, ChevronLeft, ChevronRight } from "lucide-react";
-import { featuresData, howItWorksData, statsData, testimonialsData } from "../data/landing";
+import { featuresData, statsData, testimonialsData } from "../data/landing";
 
 // ==========================================
 // SVG MOTION GRAPHICS COMPONENTS
@@ -13,7 +13,7 @@ import { featuresData, howItWorksData, statsData, testimonialsData } from "../da
 const AnimatedLineChart = () => {
   const ref = useRef(null);
   const isInView = useInView(ref, { once: true, margin: "-50px" });
-  const pathData = "M 0 150 C 50 140, 100 120, 150 130 C 200 140, 250 80, 300 90 C 350 100, 400 40, 450 60 C 500 80, 550 20, 600 10";
+  const pathData = "M 0 150 L 75 135 L 150 130 L 200 145 L 250 80 L 300 95 L 350 100 L 400 40 L 450 65 L 500 75 L 550 20 L 600 10";
   const areaData = `${pathData} L 600 200 L 0 200 Z`;
 
   return (
@@ -42,22 +42,15 @@ const AnimatedLineChart = () => {
           animate={isInView ? { pathLength: 1 } : { pathLength: 0 }}
           transition={{ duration: 1.8, ease: "easeOut" }}
         />
-        {isInView && (
           <motion.circle
             cx="600"
             cy="10"
             r="6"
             fill="#34d399"
             initial={{ scale: 0, opacity: 0 }}
-            animate={{ scale: [1, 1.5, 1], opacity: [1, 0.5, 1] }}
-            transition={{
-              scale: { delay: 1.8, duration: 2, repeat: Infinity, ease: "easeInOut" },
-              opacity: { delay: 1.8, duration: 2, repeat: Infinity, ease: "easeInOut" },
-              default: { delay: 1.8, duration: 0.3 }
-            }}
-            style={{ filter: "drop-shadow(0 0 8px rgba(52,211,153,0.8))" }}
+            animate={isInView ? { scale: 1, opacity: 1 } : {}}
+            transition={{ delay: 1.8, duration: 0.3 }}
           />
-        )}
       </svg>
     </div>
   );
@@ -193,6 +186,42 @@ const ReceiptScanLine = () => {
 // UTILITY COMPONENTS
 // ==========================================
 
+const CountUp = ({ value, duration = 2 }) => {
+  const ref = useRef(null);
+  const isInView = useInView(ref, { once: true, margin: "-50px" });
+  const [display, setDisplay] = useState("");
+
+  useEffect(() => {
+    if (!isInView) return;
+
+    // Parse the value: extract prefix ($), number, suffix (K+, B+, %, /5)
+    const match = value.match(/^([^0-9]*)([0-9.]+)(.*$)/);
+    if (!match) {
+      setDisplay(value);
+      return;
+    }
+    const prefix = match[1];
+    const target = parseFloat(match[2]);
+    const suffix = match[3];
+    const isDecimal = match[2].includes(".");
+    const decimalPlaces = isDecimal ? match[2].split(".")[1].length : 0;
+
+    const startTime = performance.now();
+    const animate = (now) => {
+      const elapsed = now - startTime;
+      const progress = Math.min(elapsed / (duration * 1000), 1);
+      // ease-out cubic
+      const eased = 1 - Math.pow(1 - progress, 3);
+      const current = eased * target;
+      setDisplay(`${prefix}${current.toFixed(decimalPlaces)}${suffix}`);
+      if (progress < 1) requestAnimationFrame(animate);
+    };
+    requestAnimationFrame(animate);
+  }, [isInView, value, duration]);
+
+  return <span ref={ref}>{isInView ? display : value.replace(/[0-9.]+/, "0")}</span>;
+};
+
 const TypewriterText = ({ text, delay = 0 }) => {
   return (
     <motion.div
@@ -281,10 +310,10 @@ const Hero = () => {
           transition={{ delay: 1.1 }}
           className="flex flex-col sm:flex-row items-start gap-4 mb-20"
         >
-          <button className="liquid-glass-strong rounded-full px-8 py-4 text-base font-semibold flex items-center gap-2 group transition-all hover:scale-105 active:scale-95 text-white">
+          <Link href="/dashboard" className="liquid-glass-strong rounded-full px-8 py-4 text-base font-semibold flex items-center gap-2 group transition-all hover:scale-105 active:scale-95 text-white">
             Get Started Free
             <ArrowUpRight className="w-5 h-5 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
-          </button>
+          </Link>
           {/* <button className="flex items-center gap-3 text-white/70 hover:text-white transition-colors px-6 py-4 group">
             <div className="w-10 h-10 rounded-full flex items-center justify-center bg-white/5 border border-white/10 group-hover:bg-white/10 transition-colors">
               <Play className="w-4 h-4 fill-white text-white" />
@@ -432,39 +461,254 @@ const FeaturesGrid = () => {
   );
 };
 
+// ==========================================
+// STACKING CARDS - HOW IT WORKS
+// ==========================================
+
+const HOW_IT_WORKS_STEPS = [
+  {
+    number: "01",
+    label: "SIGN UP",
+    title: "Create Your Account",
+    description:
+      "Get started in minutes with our simple and secure sign-up process. Link your bank accounts or start fresh — MONIX adapts to you.",
+    icon: "User",
+    stats: [
+      { v: "2 min", l: "avg setup" },
+      { v: "256-bit", l: "encryption" },
+    ],
+  },
+  {
+    number: "02",
+    label: "TRACK",
+    title: "Track Every Transaction",
+    description:
+      "Automatically categorize and track your spending in real-time. Scan receipts with AI, log expenses instantly — every dollar accounted for.",
+    icon: "BarChart3",
+    stats: [
+      { v: "40+", l: "categories" },
+      { v: "Real-time", l: "sync" },
+    ],
+  },
+  {
+    number: "03",
+    label: "INSIGHTS",
+    title: "Get AI-Powered Insights",
+    description:
+      "Gemini AI analyzes your patterns, surfaces anomalies, and delivers personalized recommendations to optimize your financial health.",
+    icon: "Lightbulb",
+    stats: [
+      { v: "98%", l: "accuracy" },
+      { v: "Monthly", l: "reports" },
+    ],
+  },
+  {
+    number: "04",
+    label: "GROW",
+    title: "Grow Your Wealth",
+    description:
+      "Set budgets, hit targets, and watch your savings compound. MONIX tracks your progress and celebrates every financial milestone with you.",
+    icon: "TrendingUp",
+    stats: [
+      { v: "3.2x", l: "avg savings" },
+      { v: "92%", l: "hit targets" },
+    ],
+  },
+];
+
+const STICKY_TOP = 100;
+const STICKY_STEP = 20;
+const SCALE_STEP = 0.035;
+const OFFSET_STEP = 8;
+
+const StackingCardIcon = ({ icon }) => {
+  const iconMap = {
+    User: (
+      <svg xmlns="http://www.w3.org/2000/svg" width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"><path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2" /><circle cx="12" cy="7" r="4" /></svg>
+    ),
+    BarChart3: (
+      <svg xmlns="http://www.w3.org/2000/svg" width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"><path d="M3 3v18h18" /><path d="M18 17V9" /><path d="M13 17V5" /><path d="M8 17v-3" /></svg>
+    ),
+    Lightbulb: (
+      <svg xmlns="http://www.w3.org/2000/svg" width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"><path d="M15 14c.2-1 .7-1.7 1.5-2.5 1-.9 1.5-2.2 1.5-3.5A6 6 0 0 0 6 8c0 1 .2 2.2 1.5 3.5.7.7 1.3 1.5 1.5 2.5" /><path d="M9 18h6" /><path d="M10 22h4" /></svg>
+    ),
+    TrendingUp: (
+      <svg xmlns="http://www.w3.org/2000/svg" width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"><polyline points="22 7 13.5 15.5 8.5 10.5 2 17" /><polyline points="16 7 22 7 22 13" /></svg>
+    ),
+  };
+  return iconMap[icon] || null;
+};
+
 const HowItWorks = () => {
-  const ref = useRef(null);
-  const isInView = useInView(ref, { once: true, margin: "-50px" });
+  const sectionRef = useRef(null);
+  const cardRefs = useRef([]);
+  const headerRef = useRef(null);
+  const isHeaderInView = useInView(headerRef, { once: true, margin: "-80px" });
+  const [depth, setDepth] = useState(HOW_IT_WORKS_STEPS.map(() => 0));
+
+  useEffect(() => {
+    function onScroll() {
+      const nextDepth = HOW_IT_WORKS_STEPS.map((_, i) => {
+        let count = 0;
+        for (let j = i + 1; j < HOW_IT_WORKS_STEPS.length; j++) {
+          const el = cardRefs.current[j];
+          if (!el) continue;
+          const rect = el.getBoundingClientRect();
+          const stickyTopJ = STICKY_TOP + j * STICKY_STEP;
+          if (rect.top <= stickyTopJ + 2) count++;
+        }
+        return count;
+      });
+      setDepth(nextDepth);
+    }
+
+    window.addEventListener("scroll", onScroll, { passive: true });
+    onScroll();
+    return () => window.removeEventListener("scroll", onScroll);
+  }, []);
 
   return (
-    <section id="how-it-works" className="relative bg-black py-32 text-white overflow-hidden min-h-[600px] flex items-center">
-      <GridFlowSVG />
-      <div className="absolute top-0 left-0 right-0 h-32 bg-gradient-to-b from-black to-transparent z-10" />
-      <div className="absolute bottom-0 left-0 right-0 h-32 bg-gradient-to-t from-black to-transparent z-10" />
+    <section
+      id="how-it-works"
+      className="relative bg-black text-white"
+      ref={sectionRef}
+      style={{ paddingTop: "8rem", paddingBottom: "12rem" }}
+    >
+      {/* Background grid — clipped independently so sticky still works */}
+      <div className="absolute inset-0 overflow-hidden pointer-events-none">
+        <GridFlowSVG />
+      </div>
+      <div className="absolute top-0 left-0 right-0 h-32 bg-gradient-to-b from-black to-transparent z-10 pointer-events-none" />
+      <div className="absolute bottom-0 left-0 right-0 h-32 bg-gradient-to-t from-black to-transparent z-10 pointer-events-none" />
 
-      <div className="relative z-20 container mx-auto px-4 max-w-4xl text-center" ref={ref}>
-        <span className="liquid-glass rounded-full px-4 py-1.5 text-sm font-medium text-white/70 mb-6 inline-block">How It Works</span>
-        <h2 className="text-5xl md:text-6xl font-heading italic mb-20"><BlurText>From transaction to insight. In seconds.</BlurText></h2>
+      {/* Header */}
+      <div className="relative z-20 container mx-auto px-4 max-w-5xl text-center mb-16" ref={headerRef}>
+        <motion.span
+          className="liquid-glass rounded-full px-4 py-1.5 text-sm font-medium text-white/70 mb-6 inline-block"
+          initial={{ opacity: 0, y: 20 }}
+          animate={isHeaderInView ? { opacity: 1, y: 0 } : {}}
+          transition={{ duration: 0.6 }}
+        >
+          How It Works
+        </motion.span>
+        <h2 className="text-5xl md:text-6xl font-heading italic">
+          <BlurText>From transaction to insight. In seconds.</BlurText>
+        </h2>
+      </div>
 
-        <div className="space-y-12 relative">
-          <div className="absolute left-1/2 -translate-x-1/2 top-0 bottom-0 w-px bg-white/10" />
+      {/* Stacking Cards */}
+      <div
+        className="relative z-20 container mx-auto px-4 max-w-4xl flex flex-col"
+        style={{ perspective: "1400px", perspectiveOrigin: "50% 0%" }}
+      >
+        {HOW_IT_WORKS_STEPS.map((step, i) => {
+          const d = depth[i];
+          const scale = 1 - d * SCALE_STEP;
+          const translateY = d * OFFSET_STEP;
 
-          {howItWorksData.map((step, i) => (
-            <motion.div
-              key={i}
-              className="relative flex flex-col items-center"
-              initial={{ opacity: 0, y: 30 }}
-              animate={isInView ? { opacity: 1, y: 0 } : {}}
-              transition={{ duration: 0.6, delay: i * 0.2 }}
+          return (
+            <div
+              key={step.label}
+              ref={(el) => {
+                cardRefs.current[i] = el;
+              }}
+              className="sticky mb-5"
+              style={{
+                top: `${STICKY_TOP + i * STICKY_STEP}px`,
+                zIndex: 10 + i,
+              }}
             >
-              <div className="liquid-glass-strong rounded-full w-14 h-14 flex items-center justify-center z-10 mb-6 bg-black">
-                {step.icon}
+              <div
+                style={{
+                  transform: `scale(${scale}) translateY(${translateY}px)`,
+                  transformOrigin: "top center",
+                  transition: "transform 0.35s cubic-bezier(0.16, 1, 0.3, 1)",
+                  willChange: "transform",
+                }}
+              >
+                <div
+                  className="group relative rounded-2xl overflow-hidden cursor-default"
+                  style={{
+                    background: "rgba(255, 255, 255, 0.03)",
+                    backdropFilter: "blur(20px)",
+                    WebkitBackdropFilter: "blur(20px)",
+                    border: "1px solid rgba(255, 255, 255, 0.08)",
+                    boxShadow:
+                      "0 4px 30px rgba(0, 0, 0, 0.4), inset 0 1px 1px rgba(255, 255, 255, 0.06)",
+                  }}
+                >
+                  {/* Gradient border shimmer */}
+                  <div
+                    className="absolute inset-0 rounded-2xl pointer-events-none"
+                    style={{
+                      padding: "1px",
+                      background:
+                        "linear-gradient(180deg, rgba(255,255,255,0.15) 0%, rgba(255,255,255,0.03) 40%, rgba(255,255,255,0) 60%, rgba(255,255,255,0.03) 80%, rgba(255,255,255,0.1) 100%)",
+                      WebkitMask:
+                        "linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0)",
+                      WebkitMaskComposite: "xor",
+                      maskComposite: "exclude",
+                    }}
+                  />
+
+                  {/* Card content */}
+                  <div className="relative z-10 p-6 sm:p-8 md:p-10">
+                    <div className="flex flex-col md:flex-row md:items-start gap-6 md:gap-8">
+                      {/* 3D glassy icon */}
+                      <div className="shrink-0">
+                        <div
+                          className="w-16 h-16 md:w-20 md:h-20 rounded-xl flex items-center justify-center transform-gpu"
+                          style={{
+                            background: "rgba(255, 255, 255, 0.06)",
+                            backdropFilter: "blur(50px)",
+                            WebkitBackdropFilter: "blur(50px)",
+                            border: "1px solid rgba(255, 255, 255, 0.12)",
+                            boxShadow:
+                              "0 8px 20px rgba(0, 0, 0, 0.3), inset 0 1px 1px rgba(255, 255, 255, 0.12), 0 1px 0 rgba(255, 255, 255, 0.05)",
+                          }}
+                        >
+                          <div className="text-white/80">
+                            <StackingCardIcon icon={step.icon} />
+                          </div>
+                        </div>
+                      </div>
+
+                      {/* Text */}
+                      <div className="flex-1 min-w-0">
+                        <div className="flex items-center gap-3 mb-3">
+                          <span className="liquid-glass rounded-full px-3 py-1 text-[10px] tracking-[0.15em] font-medium uppercase text-white/70 inline-flex items-center">
+                            Step {step.number} · {step.label}
+                          </span>
+                        </div>
+
+                        <h3 className="text-2xl md:text-3xl font-heading italic mb-3 text-white/95">
+                          {step.title}
+                        </h3>
+                        <p className="text-sm md:text-base text-white/45 leading-relaxed max-w-xl">
+                          {step.description}
+                        </p>
+                      </div>
+                    </div>
+
+                    {/* Stats — bottom row, spread apart */}
+                    <div className="flex justify-between items-end pt-6 mt-6 border-t border-white/[0.06]">
+                      {step.stats.map((s, si) => (
+                        <div key={s.l} className={si === 1 ? "text-right" : ""}>
+                          <div className="text-2xl md:text-3xl font-heading italic text-white/90">
+                            {s.v}
+                          </div>
+                          <div className="text-[10px] tracking-[0.15em] uppercase mt-0.5 text-white/30">
+                            {s.l}
+                          </div>
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+                </div>
               </div>
-              <h3 className="text-2xl font-semibold mb-3">{step.title}</h3>
-              <p className="text-white/60 text-lg max-w-md">{step.description}</p>
-            </motion.div>
-          ))}
-        </div>
+            </div>
+          );
+        })}
       </div>
     </section>
   );
@@ -493,7 +737,7 @@ const StatsSection = () => {
           <div className="grid grid-cols-2 md:grid-cols-4 gap-12 mb-16 text-center">
             {statsData.map((stat, i) => (
               <div key={i}>
-                <div className="text-4xl md:text-5xl font-heading italic text-[#34d399] mb-3">{stat.value}</div>
+                <div className="text-4xl md:text-5xl font-heading italic text-[#34d399] mb-3"><CountUp value={stat.value} duration={2.5} /></div>
                 <div className="text-white/60 text-sm">{stat.label}</div>
               </div>
             ))}
@@ -534,7 +778,7 @@ const Testimonials = () => {
   const t = testimonialsData[active];
 
   return (
-    <section className="bg-black py-24 text-white" ref={ref}>
+    <section id="testimonials" className="bg-black py-24 text-white" ref={ref}>
       <div className="container mx-auto px-4 max-w-6xl">
         {/* Header */}
         <div className="text-center mb-16">
@@ -606,11 +850,10 @@ const Testimonials = () => {
                     <button
                       key={i}
                       onClick={() => navigate(i)}
-                      className={`h-1.5 rounded-full transition-all duration-500 ${
-                        i === active
+                      className={`h-1.5 rounded-full transition-all duration-500 ${i === active
                           ? "w-8 bg-[#34d399]"
                           : "w-3 bg-white/20 hover:bg-white/40"
-                      }`}
+                        }`}
                     />
                   ))}
                 </div>
@@ -643,7 +886,7 @@ const CtaFooter = () => {
   return (
     <section className="relative bg-black pt-32 pb-8 text-white overflow-hidden">
       {/* <FloatingParticles /> */}
-      <div className="absolute inset-0" style={{ background: "radial-gradient(circle at 50% 50%, rgba(52,211,153,0.05) 0%, transparent 60%)" }} />
+
 
       <div className="relative z-10 container mx-auto px-4 text-center">
         <h2 className="text-5xl md:text-7xl font-heading italic leading-[0.85] mb-8">
