@@ -5,6 +5,8 @@ import { motion, useInView } from "motion/react";
 import Link from "next/link";
 import { ArrowUpRight, Play, ChevronLeft, ChevronRight } from "lucide-react";
 import { featuresData, statsData, testimonialsData } from "../data/landing";
+import { ReactLenis } from "lenis/react";
+import "lenis/dist/lenis.css";
 
 // ==========================================
 // SVG MOTION GRAPHICS COMPONENTS
@@ -924,16 +926,18 @@ const CtaFooter = () => {
 
 export default function LandingPage() {
   return (
-    <div className="bg-black min-h-screen text-foreground font-body">
-      {/* We assume the Navbar is either in layout.js or we could include it here. 
-          For perfect isolation, we use the modified Header. */}
-      <Hero />
-      <FeaturesChess />
-      <FeaturesGrid />
-      <HowItWorks />
-      <StatsSection />
-      <Testimonials />
-      <CtaFooter />
-    </div>
+    <ReactLenis root>
+      <div className="bg-black min-h-screen text-foreground font-body">
+        {/* We assume the Navbar is either in layout.js or we could include it here. 
+            For perfect isolation, we use the modified Header. */}
+        <Hero />
+        <FeaturesChess />
+        <FeaturesGrid />
+        <HowItWorks />
+        <StatsSection />
+        <Testimonials />
+        <CtaFooter />
+      </div>
+    </ReactLenis>
   );
 }
