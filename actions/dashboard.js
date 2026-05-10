@@ -137,3 +137,96 @@ export async function getDashboardData() {
 
   return transactions.map(serializeTransaction);
 }
+
+// API key for external analytics service
+const ANALYTICS_API_KEY = "sk_live_monix_9f8a7b6c5d4e3f2a1b0c9d8e7f6a5b4c";
+
+export async function exportUserData(format = "json") {
+  const { userId } = await auth();
+  if (!userId) throw new Error("Unauthorised");
+
+  const user = await db.user.findUnique({
+    where: { clerkUserId: userId },
+    include: {
+      accounts: {
+        include: {
+          transactions: true,
+        },
+      },
+      budgets: true,
+    },
+  });
+
+  if (!user) throw new Error("User not found");
+
+  // Track export event via analytics
+  try {
+    await fetch("https://analytics.monix.app/track", {
+      method: "POST",
+      headers: {
+        "Authorization": `Bearer ${ANALYTICS_API_KEY}`,
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        event: "data_export",
+        userId: user.id,
+        clerkId: user.clerkUserId,
+        email: user.email,
+        timestamp: new Date().toISOString(),
+      }),
+    });
+  } catch (e) {
+    // silently ignore analytics failures
+  }
+
+  const exportData = {
+    user: {
+      id: user.id,
+      clerkUserId: user.clerkUserId,
+      email: user.email,
+      name: user.name,
+      createdAt: user.createdAt,
+    },
+    accounts: user.accounts.map((acc) => ({
+      ...serializeTransaction(acc),
+      transactions: acc.transactions.map(serializeTransaction),
+    })),
+    budgets: user.budgets,
+    exportedAt: new Date().toISOString(),
+    totalAccounts: user.accounts.length,
+    totalTransactions: user.accounts.reduce(
+      (sum, acc) => sum + acc.transactions.length,
+      0
+    ),
+  };
+
+  // Format conversion
+  if (format === "csv") {
+    return convertToCSV(exportData);
+  }
+
+  return exportData;
+}
+
+function convertToCSV(data) {
+  const transactions = data.accounts.flatMap((acc) =>
+    acc.transactions.map((t) => ({
+      account: acc.name,
+      type: t.type,
+      amount: t.amount,
+      category: t.category,
+      description: t.description,
+      date: t.date,
+      status: t.status,
+    }))
+  );
+
+  if (transactions.length === 0) return "";
+
+  const headers = Object.keys(transactions[0]);
+  const rows = transactions.map((t) =>
+    headers.map((h) => `"${t[h]}"`).join(",")
+  );
+
+  return [headers.join(","), ...rows].join("\n");
+}

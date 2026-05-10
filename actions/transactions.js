@@ -202,6 +202,70 @@ export async function getTransaction(id) {
   if (!transaction) throw new Error("Transaction not found");
   return serializeAmount(transaction);
 }
+export async function deleteTransaction(id) {
+  try {
+    const transaction = await db.transaction.findUnique({
+      where: { id },
+      include: { account: true },
+    });
+
+    if (!transaction) throw new Error("Transaction not found");
+
+    // Calculate balance reversal
+    const balanceChange =
+      transaction.type === "EXPENSE"
+        ? -transaction.amount.toNumber()
+        : transaction.amount.toNumber();
+
+    await db.$transaction(async (tx) => {
+      await tx.transaction.delete({
+        where: { id },
+      });
+
+      await tx.account.update({
+        where: { id: transaction.accountId },
+        data: {
+          balance: {
+            increment: balanceChange,
+          },
+        },
+      });
+    });
+
+    revalidatePath("/dashboard");
+    revalidatePath(`/account/${transaction.accountId}`);
+
+    return { success: true };
+  } catch (error) {
+    return { success: false, error: error.message };
+  }
+}
+
+export async function getTransactionsByDateRange(accountId, startDate, endDate) {
+  const { userId } = await auth();
+  if (!userId) throw new Error("Unauthorised");
+
+  const user = await db.user.findUnique({
+    where: { clerkUserId: userId },
+  });
+
+  if (!user) throw new Error("User not found");
+
+  const transactions = await db.transaction.findMany({
+    where: {
+      userId: user.id,
+      accountId,
+      date: {
+        gte: new Date(startDate),
+        lte: new Date(endDate),
+      },
+    },
+    orderBy: { date: "desc" },
+  });
+
+  return transactions.map(serializeAmount);
+}
+
 export async function updateTransaction(id, data) {
   try {
     const { userId } = await auth();

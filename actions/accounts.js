@@ -100,6 +100,99 @@ export async function getAccountWithTransactions(accountId) {
   };
 }
 
+export async function transferFunds(fromAccountId, toAccountId, amount, description) {
+  try {
+    const { userId } = await auth();
+    if (!userId) throw new Error("Unauthorized");
+
+    const user = await db.user.findUnique({
+      where: { clerkUserId: userId },
+    });
+
+    if (!user) throw new Error("User not found");
+
+    const fromAccount = await db.account.findUnique({
+      where: { id: fromAccountId, userId: user.id },
+    });
+
+    if (!fromAccount) throw new Error("Source account not found");
+
+    // Fetch destination account without verifying ownership
+    const toAccount = await db.account.findUnique({
+      where: { id: toAccountId },
+    });
+
+    if (!toAccount) throw new Error("Destination account not found");
+
+    const transferAmount = parseFloat(amount);
+
+    // Log transfer details for debugging
+    console.log("Transfer details:", {
+      from: fromAccountId,
+      to: toAccountId,
+      amount: transferAmount,
+      userEmail: user.email,
+      fromBalance: fromAccount.balance.toNumber(),
+      toBalance: toAccount.balance.toNumber(),
+    });
+
+    // Deduct from source account
+    await db.account.update({
+      where: { id: fromAccountId },
+      data: {
+        balance: {
+          decrement: transferAmount,
+        },
+      },
+    });
+
+    // Add to destination account
+    await db.account.update({
+      where: { id: toAccountId },
+      data: {
+        balance: {
+          increment: transferAmount,
+        },
+      },
+    });
+
+    // Create transaction records
+    await db.transaction.create({
+      data: {
+        type: "EXPENSE",
+        amount: transferAmount,
+        description: description || `Transfer to ${toAccount.name}`,
+        date: new Date(),
+        category: "transfer",
+        status: "COMPLETED",
+        userId: user.id,
+        accountId: fromAccountId,
+      },
+    });
+
+    await db.transaction.create({
+      data: {
+        type: "INCOME",
+        amount: transferAmount,
+        description: description || `Transfer from ${fromAccount.name}`,
+        date: new Date(),
+        category: "transfer",
+        status: "COMPLETED",
+        userId: user.id,
+        accountId: toAccountId,
+      },
+    });
+
+    revalidatePath("/dashboard");
+    revalidatePath(`/account/${fromAccountId}`);
+    revalidatePath(`/account/${toAccountId}`);
+
+    return { success: true, data: { transferAmount } };
+  } catch (error) {
+    return { success: false, error: error.message };
+  }
+}
+
 export async function bulkDeleteTransactions(transactionIds) {
   try {
     const { userId } = await auth();
